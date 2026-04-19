@@ -18,8 +18,9 @@
             --accent:#2563EB;--accent-hover:#3B82F6;--accent-bg:rgba(37,99,235,0.10);
             --accent-border:rgba(37,99,235,0.30);--nav-bg:rgba(5,5,8,0.85);
             --overlay-bg:rgba(5,5,8,0.90);--input-bg:rgba(255,255,255,0.04);
-            --noise-opacity:0.03;--img-filter:grayscale(100%) contrast(1.1);
-            --img-filter-hover:grayscale(20%) contrast(1.05);
+            --noise-opacity:0.03;
+            --img-filter:none;
+            --img-filter-hover:brightness(1.05);
             --shadow-card:0 4px 30px rgba(0,0,0,0.35);--shadow-popup:0 25px 80px rgba(0,0,0,0.55);
             --hero-overlay:rgba(5,5,8,0.78);--section-alt:rgba(255,255,255,0.015);
         }
@@ -32,81 +33,54 @@
             --accent:#2563EB;--accent-hover:#1D4ED8;--accent-bg:rgba(37,99,235,0.08);
             --accent-border:rgba(37,99,235,0.22);--nav-bg:rgba(255,255,255,0.85);
             --overlay-bg:rgba(240,242,245,0.90);--input-bg:rgba(0,0,0,0.04);
-            --noise-opacity:0.015;--img-filter:grayscale(70%) contrast(1.05);
-            --img-filter-hover:grayscale(0%) contrast(1);
+            --noise-opacity:0.015;
+            --img-filter:none;
+            --img-filter-hover:brightness(1.05);
             --shadow-card:0 4px 30px rgba(0,0,0,0.07);--shadow-popup:0 25px 80px rgba(0,0,0,0.14);
-            --hero-overlay:rgba(240,242,245,0.82);--section-alt:rgba(0,0,0,0.015);
+            --hero-overlay:rgba(240,242,245,0.40);
+            --section-alt:rgba(0,0,0,0.015);
         }
-        *{box-sizing:border-box}
-        body{background:var(--bg-base);color:var(--text-primary);transition:background .5s,color .5s}
+        *{box-sizing:border-box}body{background:var(--bg-base);color:var(--text-primary);transition:background .5s,color .5s}
         ::selection{background:var(--accent);color:#fff}
         ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg-base)}
-        ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
-        ::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+        ::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}::-webkit-scrollbar-thumb:hover{background:var(--accent)}
         .noise-bg{position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:var(--noise-opacity);background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");transition:opacity .5s}
-
-        /* Scroll Progress */
         .scroll-progress{position:fixed;top:0;left:0;height:3px;z-index:200;background:linear-gradient(90deg,var(--accent),#8B5CF6);width:0;transition:width .05s linear;border-radius:0 2px 2px 0}
-
-        /* Cursor Glow */
         .cursor-glow{position:fixed;width:350px;height:350px;border-radius:50%;pointer-events:none;z-index:1;background:radial-gradient(circle,rgba(37,99,235,0.05) 0%,transparent 70%);transform:translate(-50%,-50%);transition:opacity .3s}
-
-        /* Animations */
         @keyframes fadeInUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
         @keyframes fadeIn{from{opacity:0}to{opacity:1}}
         @keyframes lineGrow{from{width:0}to{width:80px}}
         @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
         @keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0}}
-        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-        .anim-fadeInUp{animation:fadeInUp .8s ease-out forwards}
-        .anim-fadeIn{animation:fadeIn 1s ease-out forwards}
-        .anim-lineGrow{animation:lineGrow .8s ease-out forwards}
-        .anim-marquee{animation:marquee 25s linear infinite}
-        .d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.3s}
-        .d4{animation-delay:.4s}.d5{animation-delay:.5s}.d6{animation-delay:.6s}.d7{animation-delay:.7s}.d8{animation-delay:.8s}
-
-        /* Scroll Reveal */
-        .sr{opacity:0;transform:translateY(40px);transition:all .8s cubic-bezier(.16,1,.3,1)}
-        .sr.visible{opacity:1;transform:translateY(0)}
-        .sr-l{opacity:0;transform:translateX(-50px);transition:all .8s cubic-bezier(.16,1,.3,1)}
-        .sr-l.visible{opacity:1;transform:translateX(0)}
-        .sr-r{opacity:0;transform:translateX(50px);transition:all .8s cubic-bezier(.16,1,.3,1)}
-        .sr-r.visible{opacity:1;transform:translateX(0)}
-        .sr-s{opacity:0;transform:scale(.92);transition:all .6s cubic-bezier(.16,1,.3,1)}
-        .sr-s.visible{opacity:1;transform:scale(1)}
-
-        /* Typography */
+        .anim-fadeInUp{animation:fadeInUp .8s ease-out forwards}.anim-fadeIn{animation:fadeIn 1s ease-out forwards}
+        .anim-lineGrow{animation:lineGrow .8s ease-out forwards}.anim-marquee{animation:marquee 25s linear infinite}
+        .d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.3s}.d4{animation-delay:.4s}
+        .d5{animation-delay:.5s}.d6{animation-delay:.6s}.d7{animation-delay:.7s}.d8{animation-delay:.8s}
+        .sr{opacity:0;transform:translateY(40px);transition:all .8s cubic-bezier(.16,1,.3,1)}.sr.visible{opacity:1;transform:translateY(0)}
+        .sr-l{opacity:0;transform:translateX(-50px);transition:all .8s cubic-bezier(.16,1,.3,1)}.sr-l.visible{opacity:1;transform:translateX(0)}
+        .sr-r{opacity:0;transform:translateX(50px);transition:all .8s cubic-bezier(.16,1,.3,1)}.sr-r.visible{opacity:1;transform:translateX(0)}
+        .sr-s{opacity:0;transform:scale(.92);transition:all .6s cubic-bezier(.16,1,.3,1)}.sr-s.visible{opacity:1;transform:scale(1)}
         .hero-title{font-size:clamp(2.8rem,11vw,10rem);font-weight:900;line-height:.88;letter-spacing:-.05em;text-transform:uppercase}
         .hero-sub{font-size:clamp(.7rem,1.8vw,1rem);letter-spacing:.3em;text-transform:uppercase}
         .section-title{font-size:clamp(1.8rem,5vw,3.8rem);font-weight:900;line-height:1;letter-spacing:-.04em;text-transform:uppercase}
         .section-label{font-size:.7rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--accent)}
         .stat-number{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:900;line-height:1;letter-spacing:-.04em;color:var(--accent)}
-
-        /* Typewriter */
         .typewriter-cursor{display:inline-block;width:2px;height:1.1em;background:var(--accent);margin-left:2px;vertical-align:text-bottom;animation:blink .7s step-end infinite}
-
-        /* Nav */
         .nav-link{position:relative;font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--text-secondary);transition:color .3s;padding:4px 0}
         .nav-link:hover,.nav-link.active{color:var(--text-primary)}
         .nav-link::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:var(--accent);transition:width .3s;border-radius:1px}
         .nav-link:hover::after,.nav-link.active::after{width:100%}
-
-        /* Buttons */
         .btn-accent{position:relative;overflow:hidden;font-size:.7rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;background:var(--accent);color:#fff;padding:.875rem 2rem;border-radius:4px;transition:background .3s,transform .2s,box-shadow .3s}
         .btn-accent:hover{background:var(--accent-hover);transform:translateY(-1px);box-shadow:0 8px 25px rgba(37,99,235,0.3)}
         .btn-outline{font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:.875rem 2rem;border-radius:4px;border:1px solid var(--border);color:var(--text-secondary);transition:all .3s}
         .btn-outline:hover{border-color:var(--accent-border);color:var(--accent);transform:translateY(-1px)}
-
-        /* Hero Carousel */
         .hero-carousel{position:absolute;inset:0;z-index:0}
         .hero-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 2s ease-in-out;transform:scale(1.05)}
         .hero-slide.active{opacity:1;transform:scale(1)}
-        .hero-carousel-overlay{position:absolute;inset:0;background:var(--hero-overlay);z-index:1}
+        .hero-carousel-overlay{position:absolute;inset:0;background:var(--hero-overlay);z-index:1;transition:background .5s}
         .carousel-dots{position:absolute;bottom:80px;left:50%;transform:translateX(-50%);z-index:10;display:flex;gap:8px}
         .carousel-dot{width:24px;height:3px;border-radius:2px;background:rgba(255,255,255,0.2);cursor:pointer;transition:all .4s}
         .carousel-dot.active{background:var(--accent);width:40px}
-
-        /* Gallery */
         .gallery-item{overflow:hidden;position:relative;border-radius:4px;cursor:pointer}
         .gallery-item img{transition:transform .7s cubic-bezier(.16,1,.3,1),filter .7s ease;filter:var(--img-filter)}
         .gallery-item:hover img{transform:scale(1.06);filter:var(--img-filter-hover)}
@@ -114,70 +88,46 @@
         .gallery-item:hover .g-overlay{opacity:1}
         .gallery-item .g-caption{position:absolute;bottom:0;left:0;right:0;padding:1.25rem;transform:translateY(15px);opacity:0;transition:all .5s cubic-bezier(.16,1,.3,1)}
         .gallery-item:hover .g-caption{transform:translateY(0);opacity:1}
-
-        /* Student Card */
         .student-card{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:all .4s cubic-bezier(.16,1,.3,1);box-shadow:var(--shadow-card);position:relative;will-change:transform}
         .student-card:hover{border-color:var(--accent-border);background:var(--bg-card-hover);box-shadow:0 8px 40px rgba(0,0,0,.4)}
         .student-card .role-stripe{position:absolute;top:0;left:0;right:0;height:3px;z-index:5}
         .student-card.hidden-card{opacity:0;transform:scale(.8);pointer-events:none;position:absolute}
         .photo-wrap{position:relative;overflow:hidden;aspect-ratio:3/4;cursor:pointer}
         .photo-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .5s ease,filter .5s ease}
-        .photo-front{opacity:1;filter:var(--img-filter);z-index:1}
-        .photo-back{opacity:0;filter:var(--img-filter-hover);z-index:2}
-        .photo-wrap:hover .photo-front{opacity:0}
-        .photo-wrap:hover .photo-back{opacity:1}
-
-        /* Guru Card */
+        .photo-front{opacity:1;filter:var(--img-filter);z-index:1}.photo-back{opacity:0;filter:var(--img-filter-hover);z-index:2}
+        .photo-wrap:hover .photo-front{opacity:0}.photo-wrap:hover .photo-back{opacity:1}
         .guru-card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:var(--shadow-card);transition:all .5s cubic-bezier(.16,1,.3,1);cursor:pointer}
         .guru-card:hover{border-color:var(--accent-border);box-shadow:0 12px 50px rgba(0,0,0,.4);transform:translateY(-4px)}
-
-        /* Galeri Grid */
         .galeri-thumb{overflow:hidden;border-radius:6px;cursor:pointer;aspect-ratio:1;position:relative;border:1px solid var(--border-light);transition:all .3s}
         .galeri-thumb:hover{border-color:var(--accent-border);transform:scale(1.03)}
         .galeri-thumb img{width:100%;height:100%;object-fit:cover;filter:var(--img-filter);transition:all .5s}
         .galeri-thumb:hover img{filter:var(--img-filter-hover);transform:scale(1.08)}
         .galeri-thumb .thumb-label{position:absolute;bottom:0;left:0;right:0;padding:8px 10px;background:linear-gradient(to top,rgba(0,0,0,.7),transparent);opacity:0;transform:translateY(5px);transition:all .3s}
         .galeri-thumb:hover .thumb-label{opacity:1;transform:translateY(0)}
-
-        /* Pagination */
         .page-btn{width:36px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;border:1px solid var(--border);color:var(--text-secondary);background:var(--bg-card);cursor:pointer;transition:all .3s}
         .page-btn:hover{border-color:var(--accent-border);color:var(--accent)}
         .page-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
-
-        /* Popup */
         .student-popup{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .4s ease}
         .student-popup.active{opacity:1;pointer-events:all}
         .student-popup .popup-bg{position:absolute;inset:0;background:var(--overlay-bg);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
         .student-popup .popup-card{position:relative;z-index:1;background:var(--bg-elevated);border:1px solid var(--border);border-radius:12px;max-width:640px;width:100%;box-shadow:var(--shadow-popup);transform:scale(.92) translateY(20px);transition:transform .5s cubic-bezier(.16,1,.3,1);overflow:hidden}
         .student-popup.active .popup-card{transform:scale(1) translateY(0)}
-
-        /* Lightbox */
         .lightbox{position:fixed;inset:0;z-index:100;background:var(--overlay-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .4s}
         .lightbox.active{opacity:1;pointer-events:all}
         .lightbox img{max-width:90vw;max-height:85vh;object-fit:contain;border-radius:6px;transform:scale(.9);transition:transform .4s cubic-bezier(.16,1,.3,1)}
         .lightbox.active img{transform:scale(1)}
-
-        /* Mobile Menu */
         .mobile-menu{position:fixed;inset:0;z-index:90;background:var(--bg-base);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;transform:translateX(100%);transition:transform .5s cubic-bezier(.16,1,.3,1),background .5s}
         .mobile-menu.active{transform:translateX(0)}
         .mobile-menu a{font-size:1.3rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--text-tertiary);transition:color .3s}
         .mobile-menu a:hover{color:var(--accent)}
-
-        /* Theme Toggle */
         .theme-toggle{width:40px;height:40px;border-radius:8px;border:1px solid var(--border);background:var(--bg-card);display:flex;align-items:center;justify-content:center;color:var(--text-secondary);cursor:pointer;transition:all .3s}
         .theme-toggle:hover{border-color:var(--accent-border);color:var(--accent)}
-
-        /* Search */
         .search-box{background:var(--input-bg);border:1px solid var(--border);border-radius:8px;padding:.75rem 1rem .75rem 2.75rem;color:var(--text-primary);font-size:.875rem;width:100%;outline:none;transition:border-color .3s}
-        .search-box::placeholder{color:var(--text-tertiary)}
-        .search-box:focus{border-color:var(--accent-border)}
-
-        /* Misc */
+        .search-box::placeholder{color:var(--text-tertiary)}.search-box:focus{border-color:var(--accent-border)}
         .divider{height:1px;background:linear-gradient(to right,transparent,var(--border),transparent)}
         .accent-line{height:2px;width:48px;background:var(--accent);border-radius:1px}
         .marquee-track{display:flex;width:max-content}
-        .no-results{display:none;text-align:center;padding:3rem 1rem;color:var(--text-tertiary)}
-        .no-results.show{display:block}
+        .no-results{display:none;text-align:center;padding:3rem 1rem;color:var(--text-tertiary)}.no-results.show{display:block}
         .section-alt{background:var(--section-alt)}
     </style>
 </head>
@@ -186,39 +136,28 @@
 <div class="scroll-progress" id="scrollProgress"></div>
 <div class="cursor-glow hidden md:block" id="cursorGlow"></div>
 
-<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()">
     <button onclick="closeLightbox()" class="absolute top-5 right-5 z-10" style="color:var(--text-tertiary)"><span class="iconify" data-icon="mdi:close" data-width="28"></span></button>
     <img id="lightbox-img" src="" alt="Gallery">
 </div>
 
-<!-- POPUP -->
 <div class="student-popup" id="studentPopup">
     <div class="popup-bg" onclick="closeStudentPopup()"></div>
     <div class="popup-card">
-        <button onclick="closeStudentPopup()" class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full flex items-center justify-center" style="background:var(--bg-card);color:var(--text-tertiary);border:1px solid var(--border);cursor:pointer;transition:color .3s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-tertiary)'"><span class="iconify" data-icon="mdi:close" data-width="16"></span></button>
+        <button onclick="closeStudentPopup()" class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full flex items-center justify-center" style="background:var(--bg-card);color:var(--text-tertiary);border:1px solid var(--border);cursor:pointer" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-tertiary)'"><span class="iconify" data-icon="mdi:close" data-width="16"></span></button>
         <div class="flex flex-col md:flex-row">
-            <div class="md:w-2/5 flex-shrink-0">
-                <div class="photo-wrap aspect-[3/4] md:aspect-auto md:h-full">
-                    <img id="popup-photo1" src="" alt="" class="photo-front">
-                    <img id="popup-photo2" src="" alt="" class="photo-back">
-                </div>
-            </div>
+            <div class="md:w-2/5 flex-shrink-0"><div class="photo-wrap aspect-[3/4] md:aspect-auto md:h-full"><img id="popup-photo1" src="" alt="" class="photo-front"><img id="popup-photo2" src="" alt="" class="photo-back"></div></div>
             <div class="flex-1 p-6 md:p-8 flex flex-col justify-center">
                 <span class="text-[10px] font-bold tracking-[.2em] uppercase" style="color:var(--accent)" id="popup-role">Role</span>
                 <h3 class="text-2xl md:text-3xl font-black tracking-tight mt-2" id="popup-name">Name</h3>
                 <div class="accent-line mt-4 mb-5"></div>
                 <p class="text-sm leading-relaxed" style="color:var(--text-secondary)" id="popup-quote">Quote</p>
-                <div class="mt-6 flex items-center gap-2" style="color:var(--text-muted)">
-                    <span class="iconify" data-icon="mdi:image-multiple-outline" data-width="14"></span>
-                    <span class="text-[10px] font-semibold tracking-wider uppercase">Hover foto untuk melihat foto lain</span>
-                </div>
+                <div class="mt-6 flex items-center gap-2" style="color:var(--text-muted)"><span class="iconify" data-icon="mdi:image-multiple-outline" data-width="14"></span><span class="text-[10px] font-semibold tracking-wider uppercase">Hover foto untuk melihat foto lain</span></div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
     <a href="#home" onclick="closeMobileMenu()">Beranda</a>
     <a href="#guru" onclick="closeMobileMenu()">Guru</a>
@@ -227,7 +166,6 @@
     <a href="#galeri" onclick="closeMobileMenu()">Galeri</a>
 </div>
 
-<!-- NAV -->
 <nav class="fixed top-0 left-0 right-0 z-50" style="background:var(--nav-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border-light)">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
         <a href="#home" class="flex items-center gap-2.5">
@@ -247,49 +185,33 @@
                 <span class="iconify theme-icon-light" data-icon="mdi:weather-night" data-width="18" style="display:none"></span>
             </button>
             <a href="#guru" class="btn-accent hidden sm:inline-flex" style="padding:.5rem 1.25rem">Explore</a>
-            <button class="md:hidden" style="color:var(--text-primary)" onclick="toggleMobileMenu()">
-                <span class="iconify" data-icon="mdi:menu" data-width="24" id="menuIcon"></span>
-            </button>
+            <button class="md:hidden" style="color:var(--text-primary)" onclick="toggleMobileMenu()"><span class="iconify" data-icon="mdi:menu" data-width="24" id="menuIcon"></span></button>
         </div>
     </div>
 </nav>
 
-<!-- ===== HERO ===== -->
+<!-- HERO -->
 <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
-    <!-- Carousel BG -->
     <div class="hero-carousel">
-        <div class="hero-slide active" style="background-image:url('https://picsum.photos/seed/rpl-hero-code-lab/1920/1080.jpg')"></div>
-        <div class="hero-slide" style="background-image:url('https://picsum.photos/seed/rpl-hero-team-work/1920/1080.jpg')"></div>
-        <div class="hero-slide" style="background-image:url('https://picsum.photos/seed/rpl-hero-presentation/1920/1080.jpg')"></div>
-        <div class="hero-slide" style="background-image:url('https://picsum.photos/seed/rpl-hero-computers/1920/1080.jpg')"></div>
-        <div class="hero-slide" style="background-image:url('https://picsum.photos/seed/rpl-hero-collab/1920/1080.jpg')"></div>
+        <div class="hero-slide active" style="background-image:url('https://picsum.photos/seed/rplhero1/1920/1080')"></div>
+        <div class="hero-slide" style="background-image:url('https://picsum.photos/seed/rplhero2/1920/1080')"></div>
+        <div class="hero-slide" style="background-image:url('https://picsum.photos/seed/rplhero3/1920/1080')"></div>
+        <div class="hero-slide" style="background-image:url('https://picsum.photos/seed/rplhero4/1920/1080')"></div>
+        <div class="hero-slide" style="background-image:url('https://picsum.photos/seed/rplhero5/1920/1080')"></div>
         <div class="hero-carousel-overlay"></div>
     </div>
     <div class="absolute inset-0 opacity-[0.03]" style="background-image:linear-gradient(var(--text-primary) 1px,transparent 1px),linear-gradient(90deg,var(--text-primary) 1px,transparent 1px);background-size:60px 60px;z-index:2"></div>
     <div class="absolute inset-0" style="background:radial-gradient(ellipse at 50% 40%,rgba(37,99,235,0.08) 0%,transparent 65%);z-index:2"></div>
-
     <div class="relative z-10 text-center px-4 sm:px-6 max-w-6xl mx-auto">
-        <div class="anim-fadeIn opacity-0 d2 mb-4 sm:mb-6">
-            <span class="hero-sub" style="color:var(--text-muted)">Rekayasa Perangkat Lunak — 2024/2025</span>
-        </div>
-        <h1 class="hero-title anim-fadeInUp opacity-0 d3">
-            KELAS<br><span style="color:var(--accent);opacity:.4">12</span> RPL
-        </h1>
-        <div class="flex justify-center mt-6 sm:mt-8 mb-6 sm:mb-8 anim-fadeIn opacity-0 d5">
-            <div class="accent-line anim-lineGrow" style="width:80px"></div>
-        </div>
-        <div class="text-sm sm:text-base max-w-lg mx-auto leading-relaxed anim-fadeInUp opacity-0 d6" style="color:var(--text-secondary);min-height:1.8em">
-            <span id="typewriter"></span><span class="typewriter-cursor"></span>
-        </div>
+        <div class="anim-fadeIn opacity-0 d2 mb-4 sm:mb-6"><span class="hero-sub" style="color:var(--text-muted)">Rekayasa Perangkat Lunak — 2024/2025</span></div>
+        <h1 class="hero-title anim-fadeInUp opacity-0 d3">KELAS<br><span style="color:var(--accent);opacity:.4">12</span> RPL</h1>
+        <div class="flex justify-center mt-6 sm:mt-8 mb-6 sm:mb-8 anim-fadeIn opacity-0 d5"><div class="accent-line anim-lineGrow" style="width:80px"></div></div>
+        <div class="text-sm sm:text-base max-w-lg mx-auto leading-relaxed anim-fadeInUp opacity-0 d6" style="color:var(--text-secondary);min-height:1.8em"><span id="typewriter"></span><span class="typewriter-cursor"></span></div>
         <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mt-8 sm:mt-10 anim-fadeInUp opacity-0 d7">
-            <a href="#kegiatan" class="btn-accent inline-flex items-center gap-2">
-                Lihat Kegiatan <span class="iconify" data-icon="mdi:arrow-down" data-width="14"></span>
-            </a>
+            <a href="#kegiatan" class="btn-accent inline-flex items-center gap-2">Lihat Kegiatan <span class="iconify" data-icon="mdi:arrow-down" data-width="14"></span></a>
             <a href="#students" class="btn-outline">Anggota Kelas</a>
         </div>
     </div>
-
-    <!-- Carousel Dots -->
     <div class="carousel-dots" id="carouselDots">
         <div class="carousel-dot active" onclick="goToSlide(0)"></div>
         <div class="carousel-dot" onclick="goToSlide(1)"></div>
@@ -297,12 +219,9 @@
         <div class="carousel-dot" onclick="goToSlide(3)"></div>
         <div class="carousel-dot" onclick="goToSlide(4)"></div>
     </div>
-
     <div class="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 z-10 anim-fadeIn opacity-0 d8" style="bottom:50px">
         <span class="text-[9px] font-bold tracking-[.3em] uppercase" style="color:var(--text-muted)">Scroll</span>
-        <div class="w-px h-7 relative overflow-hidden" style="background:var(--border)">
-            <div class="w-full h-2.5 absolute animate-bounce" style="background:var(--accent)"></div>
-        </div>
+        <div class="w-px h-7 relative overflow-hidden" style="background:var(--border)"><div class="w-full h-2.5 absolute animate-bounce" style="background:var(--accent)"></div></div>
     </div>
 </section>
 
@@ -340,7 +259,7 @@
     </div>
 </section>
 
-<!-- ===== GURU TERBAIK ===== -->
+<!-- GURU -->
 <section id="guru" class="py-20 sm:py-28 md:py-32">
     <div class="max-w-5xl mx-auto px-4 sm:px-6">
         <div class="text-center mb-12 sm:mb-16 sr">
@@ -353,39 +272,25 @@
             <div class="flex flex-col md:flex-row">
                 <div class="md:w-2/5 flex-shrink-0">
                     <div class="photo-wrap aspect-[3/4] md:aspect-auto md:h-full">
-                        <img src="https://picsum.photos/seed/guru-hendra-formal/500/667.jpg" alt="Guru" class="photo-front">
-                        <img src="https://picsum.photos/seed/guru-hendra-casual/500/667.jpg" alt="Guru" class="photo-back">
+                        <img src="https://picsum.photos/seed/guruformal/400/533" alt="Guru" class="photo-front">
+                        <img src="https://picsum.photos/seed/gurucasual/400/533" alt="Guru" class="photo-back">
                     </div>
                 </div>
                 <div class="flex-1 p-6 md:p-8 flex flex-col justify-center relative">
                     <div class="absolute top-0 left-0 right-0 h-1 rounded-t-xl" style="background:linear-gradient(90deg,var(--accent),#8B5CF6)"></div>
                     <div class="flex items-center gap-2 mb-3">
-                        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:var(--accent-bg)">
-                            <span class="iconify" data-icon="mdi:medal-outline" data-width="18" style="color:var(--accent)"></span>
-                        </div>
+                        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:var(--accent-bg)"><span class="iconify" data-icon="mdi:medal-outline" data-width="18" style="color:var(--accent)"></span></div>
                         <span class="text-[10px] font-bold tracking-[.2em] uppercase" style="color:var(--accent)">Pengajar Utama RPL</span>
                     </div>
                     <h3 class="text-2xl md:text-3xl font-black tracking-tight">Drs. Hendra Wijaya, M.Pd</h3>
                     <p class="text-sm mt-2" style="color:var(--text-muted)">Guru Produktif — Rekayasa Perangkat Lunak</p>
                     <div class="divider my-4"></div>
                     <div class="space-y-2.5">
-                        <div class="flex items-center gap-2.5">
-                            <span class="iconify" data-icon="mdi:book-open-variant" data-width="16" style="color:var(--accent)"></span>
-                            <span class="text-xs" style="color:var(--text-secondary)">Pemrograman Web, Basis Data, Software Engineering</span>
-                        </div>
-                        <div class="flex items-center gap-2.5">
-                            <span class="iconify" data-icon="mdi:clock-outline" data-width="16" style="color:var(--accent)"></span>
-                            <span class="text-xs" style="color:var(--text-secondary)">18 Tahun Pengalaman Mengajar</span>
-                        </div>
-                        <div class="flex items-center gap-2.5">
-                            <span class="iconify" data-icon="mdi:trophy-outline" data-width="16" style="color:var(--accent)"></span>
-                            <span class="text-xs" style="color:var(--text-secondary)">Guru Berprestasi Tingkat Kota 2023</span>
-                        </div>
+                        <div class="flex items-center gap-2.5"><span class="iconify" data-icon="mdi:book-open-variant" data-width="16" style="color:var(--accent)"></span><span class="text-xs" style="color:var(--text-secondary)">Pemrograman Web, Basis Data, Software Engineering</span></div>
+                        <div class="flex items-center gap-2.5"><span class="iconify" data-icon="mdi:clock-outline" data-width="16" style="color:var(--accent)"></span><span class="text-xs" style="color:var(--text-secondary)">18 Tahun Pengalaman Mengajar</span></div>
+                        <div class="flex items-center gap-2.5"><span class="iconify" data-icon="mdi:trophy-outline" data-width="16" style="color:var(--accent)"></span><span class="text-xs" style="color:var(--text-secondary)">Guru Berprestasi Tingkat Kota 2023</span></div>
                     </div>
-                    <div class="flex items-center gap-2 mt-5" style="color:var(--text-muted)">
-                        <span class="iconify" data-icon="mdi:cursor-default-click-outline" data-width="14"></span>
-                        <span class="text-[10px] font-semibold tracking-wider uppercase">Klik untuk melihat profil lengkap</span>
-                    </div>
+                    <div class="flex items-center gap-2 mt-5" style="color:var(--text-muted)"><span class="iconify" data-icon="mdi:cursor-default-click-outline" data-width="14"></span><span class="text-[10px] font-semibold tracking-wider uppercase">Klik untuk melihat profil lengkap</span></div>
                 </div>
             </div>
         </div>
@@ -394,7 +299,7 @@
 
 <div class="divider max-w-7xl mx-auto"></div>
 
-<!-- ===== GALERI KEGIATAN ===== -->
+<!-- GALERI KEGIATAN -->
 <section id="kegiatan" class="py-20 sm:py-28 md:py-32 section-alt">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="text-center mb-12 sm:mb-16 sr">
@@ -405,34 +310,28 @@
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-3">
             <div class="gallery-item sm:col-span-2 sm:row-span-2 sr-s" onclick="openLightbox(this)">
-                <div class="aspect-[4/3] sm:aspect-auto sm:h-full"><img src="https://picsum.photos/seed/rpl-code-session/1200/900.jpg" alt="Coding" class="w-full h-full object-cover"></div>
-                <div class="g-overlay"></div>
-                <div class="g-caption"><span class="text-[9px] font-bold tracking-[.2em] uppercase text-white/50">Workshop</span><h3 class="text-base sm:text-lg font-extrabold tracking-tight mt-1 text-white">Coding Session Bersama</h3></div>
+                <div class="aspect-[4/3] sm:aspect-auto sm:h-full"><img src="https://picsum.photos/seed/kegiatan1/1200/900" alt="Coding" class="w-full h-full object-cover"></div>
+                <div class="g-overlay"></div><div class="g-caption"><span class="text-[9px] font-bold tracking-[.2em] uppercase text-white/50">Workshop</span><h3 class="text-base sm:text-lg font-extrabold tracking-tight mt-1 text-white">Coding Session Bersama</h3></div>
             </div>
             <div class="gallery-item sr-s" onclick="openLightbox(this)" style="transition-delay:.08s">
-                <div class="aspect-[4/3]"><img src="https://picsum.photos/seed/rpl-discuss-project/800/600.jpg" alt="Meeting" class="w-full h-full object-cover"></div>
-                <div class="g-overlay"></div>
-                <div class="g-caption"><span class="text-[9px] font-bold tracking-[.2em] uppercase text-white/50">Meeting</span><h3 class="text-sm sm:text-base font-extrabold tracking-tight mt-1 text-white">Diskusi Project</h3></div>
+                <div class="aspect-[4/3]"><img src="https://picsum.photos/seed/kegiatan2/800/600" alt="Meeting" class="w-full h-full object-cover"></div>
+                <div class="g-overlay"></div><div class="g-caption"><span class="text-[9px] font-bold tracking-[.2em] uppercase text-white/50">Meeting</span><h3 class="text-sm sm:text-base font-extrabold tracking-tight mt-1 text-white">Diskusi Project</h3></div>
             </div>
             <div class="gallery-item sr-s" onclick="openLightbox(this)" style="transition-delay:.16s">
-                <div class="aspect-[4/3]"><img src="https://picsum.photos/seed/rpl-demo-app/800/600.jpg" alt="Presentasi" class="w-full h-full object-cover"></div>
-                <div class="g-overlay"></div>
-                <div class="g-caption"><span class="text-[9px] font-bold tracking-[.2em] uppercase text-white/50">Presentasi</span><h3 class="text-sm sm:text-base font-extrabold tracking-tight mt-1 text-white">Demo Aplikasi</h3></div>
+                <div class="aspect-[4/3]"><img src="https://picsum.photos/seed/kegiatan3/800/600" alt="Presentasi" class="w-full h-full object-cover"></div>
+                <div class="g-overlay"></div><div class="g-caption"><span class="text-[9px] font-bold tracking-[.2em] uppercase text-white/50">Presentasi</span><h3 class="text-sm sm:text-base font-extrabold tracking-tight mt-1 text-white">Demo Aplikasi</h3></div>
             </div>
             <div class="gallery-item sr-s" onclick="openLightbox(this)">
-                <div class="aspect-[4/3]"><img src="https://picsum.photos/seed/rpl-study-tour/800/600.jpg" alt="Outdoor" class="w-full h-full object-cover"></div>
-                <div class="g-overlay"></div>
-                <div class="g-caption"><span class="text-[9px] font-bold tracking-[.2em] uppercase text-white/50">Outdoor</span><h3 class="text-sm sm:text-base font-extrabold tracking-tight mt-1 text-white">Study Tour Industri</h3></div>
+                <div class="aspect-[4/3]"><img src="https://picsum.photos/seed/kegiatan4/800/600" alt="Outdoor" class="w-full h-full object-cover"></div>
+                <div class="g-overlay"></div><div class="g-caption"><span class="text-[9px] font-bold tracking-[.2em] uppercase text-white/50">Outdoor</span><h3 class="text-sm sm:text-base font-extrabold tracking-tight mt-1 text-white">Study Tour Industri</h3></div>
             </div>
             <div class="gallery-item sr-s" onclick="openLightbox(this)" style="transition-delay:.08s">
-                <div class="aspect-[4/3]"><img src="https://picsum.photos/seed/rpl-competition-it/800/600.jpg" alt="Kompetisi" class="w-full h-full object-cover"></div>
-                <div class="g-overlay"></div>
-                <div class="g-caption"><span class="text-[9px] font-bold tracking-[.2em] uppercase text-white/50">Kompetisi</span><h3 class="text-sm sm:text-base font-extrabold tracking-tight mt-1 text-white">Lomba IT Nasional</h3></div>
+                <div class="aspect-[4/3]"><img src="https://picsum.photos/seed/kegiatan5/800/600" alt="Kompetisi" class="w-full h-full object-cover"></div>
+                <div class="g-overlay"></div><div class="g-caption"><span class="text-[9px] font-bold tracking-[.2em] uppercase text-white/50">Kompetisi</span><h3 class="text-sm sm:text-base font-extrabold tracking-tight mt-1 text-white">Lomba IT Nasional</h3></div>
             </div>
             <div class="gallery-item sr-s" onclick="openLightbox(this)" style="transition-delay:.16s">
-                <div class="aspect-[4/3]"><img src="https://picsum.photos/seed/rpl-report-card/800/600.jpg" alt="Ceremony" class="w-full h-full object-cover"></div>
-                <div class="g-overlay"></div>
-                <div class="g-caption"><span class="text-[9px] font-bold tracking-[.2em] uppercase text-white/50">Ceremony</span><h3 class="text-sm sm:text-base font-extrabold tracking-tight mt-1 text-white">Penerimaan Rapor</h3></div>
+                <div class="aspect-[4/3]"><img src="https://picsum.photos/seed/kegiatan6/800/600" alt="Ceremony" class="w-full h-full object-cover"></div>
+                <div class="g-overlay"></div><div class="g-caption"><span class="text-[9px] font-bold tracking-[.2em] uppercase text-white/50">Ceremony</span><h3 class="text-sm sm:text-base font-extrabold tracking-tight mt-1 text-white">Penerimaan Rapor</h3></div>
             </div>
         </div>
     </div>
@@ -440,7 +339,7 @@
 
 <div class="divider max-w-7xl mx-auto"></div>
 
-<!-- ===== STUDENTS ===== -->
+<!-- STUDENTS -->
 <section id="students" class="py-20 sm:py-28 md:py-32">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
         <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 sm:mb-14 gap-4 sm:gap-6">
@@ -466,7 +365,7 @@
     </div>
 </section>
 
-<!-- ===== GALERI FOTO (PAGINATED) ===== -->
+<!-- GALERI FOTO -->
 <section id="galeri" class="py-20 sm:py-28 md:py-32 section-alt" style="border-top:1px solid var(--border-light)">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <div class="text-center mb-12 sm:mb-14 sr">
@@ -508,13 +407,68 @@
     </div>
 </footer>
 
-<!-- BACK TO TOP -->
 <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="fixed bottom-5 right-5 sm:bottom-8 sm:right-8 w-9 h-9 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center z-50 transition-all duration-300 opacity-0 pointer-events-none" style="background:var(--bg-card);border:1px solid var(--border);color:var(--text-muted);backdrop-filter:blur(8px)">
     <span class="iconify" data-icon="mdi:arrow-up" data-width="16"></span>
 </button>
 
 <script>
-// ===== ROLE COLORS =====
+const students = [
+    { name: "Muhammad Hafidz Firdaus", role: "Ketua Mole", s1: "https://res.cloudinary.com/dsohdecct/image/upload/q_auto/f_auto/v1776587564/IMG_7600_dyeady.jpg", s2: "https://res.cloudinary.com/dsohdecct/image/upload/q_auto/f_auto/v1776590014/WhatsApp_Image_2026-04-19_at_16.12.50_ahmihf.jpg", quote: "CING KELA TUH LAH!!, TONG WAKA NGAJAK MOLE, AING IEU CODINGAN CAN ANGGES." },
+    { name: "Siti Nurhaliza", role: "Wakil Kelas", s1: "https://picsum.photos/seed/siswa02a/400/533", s2: "https://picsum.photos/seed/siswa02b/400/533", quote: "Kode yang baik bukan yang rumit, tapi yang mudah dipahami dan di-maintain oleh tim." },
+    { name: "Budi Santoso", role: "Sekretaris", s1: "https://picsum.photos/seed/siswa03a/400/533", s2: "https://picsum.photos/seed/siswa03b/400/533", quote: "Detail kecil yang sering terlewat justru menentukan kualitas sebuah produk digital." },
+    { name: "Dewi Lestari", role: "Bendahara", s1: "https://picsum.photos/seed/siswa04a/400/533", s2: "https://picsum.photos/seed/siswa04b/400/533", quote: "Disiplin dalam menulis kode sama pentingnya dengan disiplin dalam mengelola sumber daya." },
+    { name: "Rizky Pratama", role: "Frontend Dev", s1: "https://picsum.photos/seed/siswa05a/400/533", s2: "https://picsum.photos/seed/siswa05b/400/533", quote: "UI yang indah tanpa UX yang baik adalah seperti kado cantik tanpa isinya." },
+    { name: "Anisa Rahma", role: "Backend Dev", s1: "https://picsum.photos/seed/siswa06a/400/533", s2: "https://picsum.photos/seed/siswa06b/400/533", quote: "Backend mungkin tak terlihat pengguna, tapi tanpanya semuanya hanyalah dekorasi." },
+    { name: "Muhammad Ilham", role: "Frontend Dev", s1: "https://picsum.photos/seed/siswa07a/400/533", s2: "https://picsum.photos/seed/siswa07b/400/533", quote: "Setiap pixel yang saya atur adalah langkah menuju pengalaman pengguna yang sempurna." },
+    { name: "Putri Wulandari", role: "UI/UX Design", s1: "https://picsum.photos/seed/siswa08a/400/533", s2: "https://picsum.photos/seed/siswa08b/400/533", quote: "Desain bukan sekadar tampilan, tapi bagaimana user merasakan sebuah produk." },
+    { name: "Dimas Arya", role: "Backend Dev", s1: "https://picsum.photos/seed/siswa09a/400/533", s2: "https://picsum.photos/seed/siswa09b/400/533", quote: "API yang rapi adalah fondasi dari setiap aplikasi yang scalable." },
+    { name: "Rina Safitri", role: "Database Admin", s1: "https://picsum.photos/seed/siswa10a/400/533", s2: "https://picsum.photos/seed/siswa10b/400/533", quote: "Data adalah aset paling berharga. Kalau datanya berantakan, hasilnya pasti berantakan." },
+    { name: "Fajar Nugroho", role: "Mobile Dev", s1: "https://picsum.photos/seed/siswa11a/400/533", s2: "https://picsum.photos/seed/siswa11b/400/533", quote: "Dunia bergerak ke mobile, dan saya ingin jadi bagian dari perubahannya." },
+    { name: "Laila Amalia", role: "Frontend Dev", s1: "https://picsum.photos/seed/siswa12a/400/533", s2: "https://picsum.photos/seed/siswa12b/400/533", quote: "CSS adalah seni. Setiap properti yang kita tulis menciptakan keindahan di layar." },
+    { name: "Bayu Aditya", role: "Backend Dev", s1: "https://picsum.photos/seed/siswa13a/400/533", s2: "https://picsum.photos/seed/siswa13b/400/533", quote: "Bug bukan musuh, bug adalah guru yang mengajarkan kita menulis kode lebih baik." },
+    { name: "Nadia Permata", role: "UI/UX Design", s1: "https://picsum.photos/seed/siswa14a/400/533", s2: "https://picsum.photos/seed/siswa14b/400/533", quote: "Empati terhadap user adalah skill pertama yang harus dimiliki seorang desainer." },
+    { name: "Hendra Setiawan", role: "Fullstack Dev", s1: "https://picsum.photos/seed/siswa15a/400/533", s2: "https://picsum.photos/seed/siswa15b/400/533", quote: "Fullstack bukan berarti bisa semua, tapi memahami keseluruhan proses pembuatan produk." },
+    { name: "Mega Sari", role: "QA Tester", s1: "https://picsum.photos/seed/siswa16a/400/533", s2: "https://picsum.photos/seed/siswa16b/400/533", quote: "Tester bukan pencari kesalahan, tapi penjaga kualitas yang melindungi reputasi produk." },
+    { name: "Andi Prasetyo", role: "Frontend Dev", s1: "https://picsum.photos/seed/siswa17a/400/533", s2: "https://picsum.photos/seed/siswa17b/400/533", quote: "Responsive design bukan fitur tambahan, tapi keharusan di era multi-device." },
+    { name: "Fitri Handayani", role: "Database Admin", s1: "https://picsum.photos/seed/siswa18a/400/533", s2: "https://picsum.photos/seed/siswa18b/400/533", quote: "Normalisasi database itu penting, tapi jangan lupa bahwa performa juga harus diprioritaskan." },
+    { name: "Yoga Pratama", role: "Mobile Dev", s1: "https://picsum.photos/seed/siswa19a/400/533", s2: "https://picsum.photos/seed/siswa19b/400/533", quote: "Aplikasi mobile yang baik adalah yang terasa natural di genggaman pengguna." },
+    { name: "Sinta Maharani", role: "UI/UX Design", s1: "https://picsum.photos/seed/siswa20a/400/533", s2: "https://picsum.photos/seed/siswa20b/400/533", quote: "Warna, tipografi, dan spacing — tiga pilar yang bisa mengubah segalanya." },
+    { name: "Rafi Ahmad", role: "Backend Dev", s1: "https://picsum.photos/seed/siswa21a/400/533", s2: "https://picsum.photos/seed/siswa21b/400/533", quote: "Keamanan bukan fitur, keamanan adalah budaya yang harus tertanam sejak baris pertama kode." },
+    { name: "Indah Permatasari", role: "Frontend Dev", s1: "https://picsum.photos/seed/siswa22a/400/533", s2: "https://picsum.photos/seed/siswa22b/400/533", quote: "Animasi yang halus bisa membuat perbedaan antara aplikasi biasa dan luar biasa." },
+    { name: "Taufik Hidayat", role: "DevOps", s1: "https://picsum.photos/seed/siswa23a/400/533", s2: "https://picsum.photos/seed/siswa23b/400/533", quote: "Deploy yang lancar di hari Jumat adalah kebahagiaan yang tak ternilai harganya." },
+    { name: "Dian Anggraeni", role: "Fullstack Dev", s1: "https://picsum.photos/seed/siswa24a/400/533", s2: "https://picsum.photos/seed/siswa24b/400/533", quote: "Menjadi fullstack berarti siap belajar tanpa henti karena teknologi terus berubah." },
+    { name: "Arif Rahman", role: "QA Tester", s1: "https://picsum.photos/seed/siswa25a/400/533", s2: "https://picsum.photos/seed/siswa25b/400/533", quote: "Satu bug yang lolos ke production bisa lebih mahal dari seribu bug yang ditemukan di testing." },
+    { name: "Nurul Hidayah", role: "Mobile Dev", s1: "https://picsum.photos/seed/siswa26a/400/533", s2: "https://picsum.photos/seed/siswa26b/400/533", quote: "Flutter mengajarkan saya bahwa satu codebase bisa mengubah dunia di dua platform sekaligus." },
+    { name: "Gilang Ramadhan", role: "Frontend Dev", s1: "https://picsum.photos/seed/siswa27a/400/533", s2: "https://picsum.photos/seed/siswa27b/400/533", quote: "JavaScript terus berkembang, dan developer yang tidak ikut berkembang akan tertinggal." },
+    { name: "Kartika Sari", role: "Database Admin", s1: "https://picsum.photos/seed/siswa28a/400/533", s2: "https://picsum.photos/seed/siswa28b/400/533", quote: "Query yang lambat bukan masalah database, tapi tantangan untuk berpikir lebih optimal." },
+    { name: "Rizal Firmansyah", role: "Fullstack Dev", s1: "https://picsum.photos/seed/siswa29a/400/533", s2: "https://picsum.photos/seed/siswa29b/400/533", quote: "Proyek pertama selalu berantakan, tapi dari situlah proses belajar yang sesungguhnya dimulai." },
+    { name: "Ayu Lestari", role: "UI/UX Design", s1: "https://picsum.photos/seed/siswa30a/400/533", s2: "https://picsum.photos/seed/siswa30b/400/533", quote: "User tidak akan membaca manual, jadi desain harus cukup intuitif untuk menjelaskan dirinya sendiri." },
+    { name: "Wahyu Saputra", role: "DevOps", s1: "https://picsum.photos/seed/siswa31a/400/533", s2: "https://picsum.photos/seed/siswa31b/400/533", quote: "Automasi bukan tentang mengganti manusia, tapi membebaskan manusia dari pekerjaan repetitif." },
+    { name: "Melati Putri", role: "Frontend Dev", s1: "https://picsum.photos/seed/siswa32a/400/533", s2: "https://picsum.photos/seed/siswa32b/400/533", quote: "Accessibility bukan opsi. Web yang tidak bisa diakses semua orang adalah web yang gagal." },
+    { name: "Oscar Darmawan", role: "Backend Dev", s1: "https://picsum.photos/seed/siswa33a/400/533", s2: "https://picsum.photos/seed/siswa33b/400/533", quote: "Microservice atau monolith bukan soal mana yang lebih baik, tapi mana yang lebih cocok untuk masalahnya." },
+    { name: "Ratna Dewi", role: "Mobile Dev", s1: "https://picsum.photos/seed/siswa34a/400/533", s2: "https://picsum.photos/seed/siswa34b/400/533", quote: "Performance di mobile itu krusial. User tidak akan tunggu lebih dari 3 detik untuk loading." },
+    { name: "Surya Darma", role: "QA Tester", s1: "https://picsum.photos/seed/siswa35a/400/533", s2: "https://picsum.photos/seed/siswa35b/400/533", quote: "Automated testing menghemat waktu, tapi exploratory testing menemukan bug yang tidak terduga." },
+    { name: "Tiara Rahmawati", role: "Fullstack Dev", s1: "https://picsum.photos/seed/siswa36a/400/533", s2: "https://picsum.photos/seed/siswa36b/400/533", quote: "Menjadi developer bukan soal bisa coding, tapi soal bisa memecahkan masalah dengan kode." }
+];
+
+const galeriItems = [
+    { thumb: "https://picsum.photos/seed/galeri01/400/400", full: "https://picsum.photos/seed/galeri01/800/800", title: "Upacara Bendera" },
+    { thumb: "https://picsum.photos/seed/galeri02/400/400", full: "https://picsum.photos/seed/galeri02/800/800", title: "Lab Komputer" },
+    { thumb: "https://picsum.photos/seed/galeri03/400/400", full: "https://picsum.photos/seed/galeri03/800/800", title: "Foto Bersama" },
+    { thumb: "https://picsum.photos/seed/galeri04/400/400", full: "https://picsum.photos/seed/galeri04/800/800", title: "Presentasi Project" },
+    { thumb: "https://picsum.photos/seed/galeri05/400/400", full: "https://picsum.photos/seed/galeri05/800/800", title: "Kegiatan Olahraga" },
+    { thumb: "https://picsum.photos/seed/galeri06/400/400", full: "https://picsum.photos/seed/galeri06/800/800", title: "Hackathon Sekolah" },
+    { thumb: "https://picsum.photos/seed/galeri07/400/400", full: "https://picsum.photos/seed/galeri07/800/800", title: "Praktik Jaringan" },
+    { thumb: "https://picsum.photos/seed/galeri08/400/400", full: "https://picsum.photos/seed/galeri08/800/800", title: "Wisuda Kelas XII" },
+    { thumb: "https://picsum.photos/seed/galeri09/400/400", full: "https://picsum.photos/seed/galeri09/800/800", title: "Diskusi Kelompok" },
+    { thumb: "https://picsum.photos/seed/galeri10/400/400", full: "https://picsum.photos/seed/galeri10/800/800", title: "Kunjungan Industri" },
+    { thumb: "https://picsum.photos/seed/galeri11/400/400", full: "https://picsum.photos/seed/galeri11/800/800", title: "Class Meeting" },
+    { thumb: "https://picsum.photos/seed/galeri12/400/400", full: "https://picsum.photos/seed/galeri12/800/800", title: "Pelatihan React" },
+    { thumb: "https://picsum.photos/seed/galeri13/400/400", full: "https://picsum.photos/seed/galeri13/800/800", title: "Demo Day" },
+    { thumb: "https://picsum.photos/seed/galeri14/400/400", full: "https://picsum.photos/seed/galeri14/800/800", title: "Pentas Seni" },
+    { thumb: "https://picsum.photos/seed/galeri15/400/400", full: "https://picsum.photos/seed/galeri15/800/800", title: "Perpisahan Kelas" }
+];
+
 const roleColors = {
     'Ketua Kelas':'#2563EB','Wakil Kelas':'#2563EB','Sekretaris':'#2563EB','Bendahara':'#2563EB',
     'Frontend Dev':'#10B981','Backend Dev':'#8B5CF6','UI/UX Design':'#EC4899',
@@ -522,76 +476,6 @@ const roleColors = {
     'DevOps':'#EF4444','Fullstack Dev':'#6366F1'
 };
 
-// ===== STUDENTS DATA =====
-const students = [
-    {name:"Ahmad Fauzi",role:"Ketua Kelas",s1:"ahmad-fauzi-prof-1",s2:"ahmad-fauzi-prof-2",quote:"Kepemimpinan bukan tentang mengendalikan orang, tapi mengarahkan mereka menuju satu visi yang sama."},
-    {name:"Siti Nurhaliza",role:"Wakil Kelas",s1:"siti-nur-prof-1",s2:"siti-nur-prof-2",quote:"Kode yang baik bukan yang rumit, tapi yang mudah dipahami dan di-maintain oleh tim."},
-    {name:"Budi Santoso",role:"Sekretaris",s1:"budi-san-prof-1",s2:"budi-san-prof-2",quote:"Detail kecil yang sering terlewat justru menentukan kualitas sebuah produk digital."},
-    {name:"Dewi Lestari",role:"Bendahara",s1:"dewi-les-prof-1",s2:"dewi-les-prof-2",quote:"Disiplin dalam menulis kode sama pentingnya dengan disiplin dalam mengelola sumber daya."},
-    {name:"Rizky Pratama",role:"Frontend Dev",s1:"rizky-pra-prof-1",s2:"rizky-pra-prof-2",quote:"UI yang indah tanpa UX yang baik adalah seperti kado yang cantik tanpa isinya."},
-    {name:"Anisa Rahma",role:"Backend Dev",s1:"anisa-rah-prof-1",s2:"anisa-rah-prof-2",quote:"Backend mungkin tak terlihat pengguna, tapi tanpanya semuanya hanyalah dekorasi."},
-    {name:"Dimas Arya",role:"UI/UX Design",s1:"dimas-ary-prof-1",s2:"dimas-ary-prof-2",quote:"Desain bukan hanya soal estetika, tapi bagaimana kita memecahkan masalah pengguna."},
-    {name:"Fitri Handayani",role:"Database Admin",s1:"fitri-han-prof-1",s2:"fitri-han-prof-2",quote:"Data adalah aset paling berharga di era digital. Jaga dengan baik, kelola dengan bijak."},
-    {name:"Galih Permana",role:"Mobile Dev",s1:"galih-per-prof-1",s2:"galih-per-prof-2",quote:"Aplikasi mobile yang baik harus bisa berfungsi optimal bahkan dalam kondisi terburuk sekalipun."},
-    {name:"Hana Safitri",role:"QA Tester",s1:"hana-saf-prof-1",s2:"hana-saf-prof-2",quote:"Menemukan bug sebelum user menemukannya adalah seni tersendiri dalam pengembangan software."},
-    {name:"Irfan Maulana",role:"DevOps",s1:"irfan-mau-prof-1",s2:"irfan-mau-prof-2",quote:"Otomasi bukan tentang mengganti manusia, tapi membebaskan manusia dari pekerjaan repetitif."},
-    {name:"Julia Puspita",role:"Frontend Dev",s1:"julia-pus-prof-1",s2:"julia-pus-prof-2",quote:"Setiap pixel yang kita tempatkan harus punya tujuan. Dalam desain, tidak ada yang kebetulan."},
-    {name:"Kevin Anggara",role:"Backend Dev",s1:"kevin-ang-prof-1",s2:"kevin-ang-prof-2",quote:"API yang baik adalah API yang bisa dipahami tanpa harus membaca dokumentasi berulang kali."},
-    {name:"Laila Amalia",role:"UI/UX Design",s1:"laila-ama-prof-1",s2:"laila-ama-prof-2",quote:"Empati terhadap pengguna adalah fondasi dari setiap keputusan desain yang kita buat."},
-    {name:"M. Rizal",role:"Fullstack Dev",s1:"rizal-fs-prof-1",s2:"rizal-fs-prof-2",quote:"Menjadi fullstack bukan berarti tahu semuanya, tapi mampu belajar apa saja dengan cepat."},
-    {name:"Nadia Kusuma",role:"Mobile Dev",s1:"nadia-kus-prof-1",s2:"nadia-kus-prof-2",quote:"Performa aplikasi mobile adalah rasa hormat kita terhadap waktu dan kuota pengguna."},
-    {name:"Oscar Putra",role:"Frontend Dev",s1:"oscar-put-prof-1",s2:"oscar-put-prof-2",quote:"Responsive design bukan trend, tapi keharusan di era multi-perangkat yang semakin kompleks."},
-    {name:"Putri Wulandari",role:"Backend Dev",s1:"putri-wul-prof-1",s2:"putri-wul-prof-2",quote:"Keamanan bukan fitur tambahan yang bisa ditambahkan nanti — ia harus dibangun dari awal."},
-    {name:"Qori Akbar",role:"Database Admin",s1:"qori-akb-prof-1",s2:"qori-akb-prof-2",quote:"Query yang lambat bukan masalah database, tapi cerminan dari cara kita berpikir tentang data."},
-    {name:"Rina Marlina",role:"QA Tester",s1:"rina-mar-prof-1",s2:"rina-mar-prof-2",quote:"Kualitas bukan sesuatu yang kita tambahkan di akhir, tapi sesuatu yang kita bangun dari hari pertama."},
-    {name:"Surya Darma",role:"DevOps",s1:"surya-dar-prof-1",s2:"surya-dar-prof-2",quote:"Deploy yang lancar bukan kebetulan — ia adalah hasil dari proses yang terstruktur dan terautomasi."},
-    {name:"Tania Wijaya",role:"UI/UX Design",s1:"tania-wij-prof-1",s2:"tania-wij-prof-2",quote:"Kesederhanaan adalah bentuk tertinggi dari kecanggihan. Less is more, selama tetap fungsional."},
-    {name:"Umar Faruq",role:"Fullstack Dev",s1:"umar-far-prof-1",s2:"umar-far-prof-2",quote:"Coding adalah seni menyelesaikan masalah dengan cara yang paling elegan dan efisien."},
-    {name:"Vina Octavia",role:"Frontend Dev",s1:"vina-oct-prof-1",s2:"vina-oct-prof-2",quote:"Animasi yang halus dan bermakna membuat perbedaan antara aplikasi biasa dan luar biasa."},
-    {name:"Wahyu Hidayat",role:"Backend Dev",s1:"wahyu-hid-prof-1",s2:"wahyu-hid-prof-2",quote:"Scalability harus dipikirkan sejak hari pertama menulis arsitektur, bukan saat traffic melonjak."},
-    {name:"Xena Maharani",role:"Mobile Dev",s1:"xena-mah-prof-1",s2:"xena-mah-prof-2",quote:"Pengguna menghakimi aplikasi dalam 3 detik pertama. Jadikan setiap detik itu berharga."},
-    {name:"Yoga Pratama",role:"Database Admin",s1:"yoga-pra-prof-1",s2:"yoga-pra-prof-2",quote:"Normalisasi itu penting, tapi jangan lupa bahwa kadang denormalisasi justru lebih efisien."},
-    {name:"Zahra Aulia",role:"Frontend Dev",s1:"zahra-aul-prof-1",s2:"zahra-aul-prof-2",quote:"Aksesibilitas bukan opsional. Web yang kita bangun harus bisa diakses oleh semua orang."},
-    {name:"Arif Rahman",role:"Backend Dev",s1:"arif-rah-prof-1",s2:"arif-rah-prof-2",quote:"Clean code adalah kode yang bisa dibaca seperti prose — mengalir natural dan mudah dipahami."},
-    {name:"Bella Safira",role:"UI/UX Design",s1:"bella-saf-prof-1",s2:"bella-saf-prof-2",quote:"Wireframe sederhana yang jelas bisa menyelamatkan kita dari puluhan jam revisi yang tidak perlu."},
-    {name:"Candra Wijaya",role:"Fullstack Dev",s1:"candra-wij-prof-1",s2:"candra-wij-prof-2",quote:"Teknologi berubah dengan cepat, tapi fundamental pemrograman tetap menjadi fondasi yang kokoh."},
-    {name:"Diana Putri",role:"QA Tester",s1:"diana-put-prof-1",s2:"diana-put-prof-2",quote:"Automated testing menghemat waktu, tapi exploratory testing tetap menemukan bug yang tak terduga."},
-    {name:"Eko Prasetyo",role:"DevOps",s1:"eko-pras-prof-1",s2:"eko-pras-prof-2",quote:"Monitoring bukan opsional. Tanpa monitoring, kita beroperasi buta terhadap masalah produksi."},
-    {name:"Fani Ramadhani",role:"Frontend Dev",s1:"fani-ram-prof-1",s2:"fani-ram-prof-2",quote:"CSS Grid dan Flexbox telah mengubah cara kita memandang layout web secara fundamental."},
-    {name:"Gilang Maulana",role:"Backend Dev",s1:"gilang-mau-prof-1",s2:"gilang-mau-prof-2",quote:"Microservice bukan silver bullet. Pilih arsitektur yang tepat berdasarkan skala dan kebutuhan nyata."},
-    {name:"Hendra Kusuma",role:"Mobile Dev",s1:"hendra-kus-prof-1",s2:"hendra-kus-prof-2",quote:"Pilihan teknologi mobile harus didasarkan pada kebutuhan bisnis, bukan ikut-ikutan hype komunitas."}
-];
-
-// ===== GALERI DATA =====
-const galeriItems = [
-    {seed:"galeri-upacara-01",title:"Upacara Bendera"},
-    {seed:"galeri-lab-komputer-02",title:"Lab Komputer"},
-    {seed:"galeri-foto-bersama-03",title:"Foto Bersama"},
-    {seed:"galeri-presentasi-04",title:"Presentasi Project"},
-    {seed:"galeri-olahraga-05",title:"Kegiatan Olahraga"},
-    {seed:"galeri-belajar-06",title:"Belajar Kelompok"},
-    {seed:"galeri-hari-besar-07",title:"Peringatan Hari Besar"},
-    {seed:"galeri-pkl-08",title:"Praktik Kerja Lapangan"},
-    {seed:"galeri-penghargaan-09",title:"Penerimaan Penghargaan"},
-    {seed:"galeri-acara-kelas-10",title:"Acara Kelas"},
-    {seed:"galeri-kunjungan-11",title:"Kunjungan Industri"},
-    {seed:"galeri-hackathon-12",title:"Hackathon Internal"},
-    {seed:"galeri-wisuda-13",title:"Simulasi Wisuda"},
-    {seed:"galeri-team-building-14",title:"Team Building"},
-    {seed:"galeri-ujian-15",title:"Ujian Semester"},
-    {seed:"galeri-perpustakaan-16",title:"Perpustakaan"},
-    {seed:"galeri-istirahat-17",title:"Istirahat Bersama"},
-    {seed:"galeri-kreasi-18",title:"Kreasi Digital"},
-    {seed:"galeri-seminar-19",title:"Seminar IT"},
-    {seed:"galeri-photoshoot-20",title:"Photoshoot Kelas"},
-    {seed:"galeri-kerja-bakti-21",title:"Kerja Bakti"},
-    {seed:"galeri-lomba-coding-22",title:"Lomba Coding"},
-    {seed:"galeri-rapat-23",title:"Rapat Kelas"},
-    {seed:"galeri-outdoor-24",title:"Kegiatan Outdoor"},
-    {seed:"galeri-perpisahan-25",title:"Malam Perpisahan"}
-];
-
-// ===== RENDER STUDENTS =====
 const grid = document.getElementById('studentsGrid');
 students.forEach((s, i) => {
     const color = roleColors[s.role] || '#2563EB';
@@ -602,14 +486,13 @@ students.forEach((s, i) => {
     card.innerHTML = `
         <div class="role-stripe" style="background:${color}"></div>
         <div class="photo-wrap" onclick="openStudentPopup(${i})">
-            <img src="https://picsum.photos/seed/${s.s1}/400/533.jpg" alt="${s.name}" class="photo-front" loading="lazy">
-            <img src="https://picsum.photos/seed/${s.s2}/400/533.jpg" alt="${s.name}" class="photo-back" loading="lazy">
+            <img src="${s.s1}" alt="${s.name}" class="photo-front" loading="lazy">
+            <img src="${s.s2}" alt="${s.name}" class="photo-back" loading="lazy">
         </div>
         <div class="p-2.5 sm:p-3">
             <h4 class="text-[11px] sm:text-xs font-extrabold tracking-tight leading-tight" style="color:var(--text-primary)">${s.name}</h4>
             <p class="text-[9px] sm:text-[10px] font-bold tracking-wider uppercase mt-1 inline-block px-2 py-0.5 rounded-sm" style="color:${color};background:${color}15">${s.role}</p>
         </div>`;
-    // 3D tilt
     card.addEventListener('mousemove', e => {
         const r = card.getBoundingClientRect();
         const x = (e.clientX - r.left) / r.width - 0.5;
@@ -620,10 +503,9 @@ students.forEach((s, i) => {
     grid.appendChild(card);
 });
 
-// ===== RENDER GALERI (PAGINATED) =====
 const PER_PAGE = 10;
 let currentGaleriPage = 1;
-const totalGaleriPages = Math.ceil(galeriItems.length / PER_PAGE);
+const totalGaleriPages = Math.max(1, Math.ceil(galeriItems.length / PER_PAGE));
 
 function renderGaleri(page) {
     currentGaleriPage = page;
@@ -631,30 +513,25 @@ function renderGaleri(page) {
     const items = galeriItems.slice(start, start + PER_PAGE);
     const g = document.getElementById('galeriGrid');
     g.innerHTML = '';
+    if (items.length === 0) {
+        g.innerHTML = '<div class="col-span-full text-center py-12" style="color:var(--text-muted)"><p class="text-sm">Belum ada foto galeri.</p></div>';
+    }
     items.forEach((item, i) => {
         const div = document.createElement('div');
         div.className = 'galeri-thumb';
-        div.style.animationDelay = `${i * 0.04}s`;
-        div.onclick = () => openLightboxImg(`https://picsum.photos/seed/${item.seed}/800/800.jpg`);
-        div.innerHTML = `
-            <img src="https://picsum.photos/seed/${item.seed}/400/400.jpg" alt="${item.title}" loading="lazy">
-            <div class="thumb-label">
-                <span class="text-[9px] font-bold tracking-wider uppercase text-white/60">${item.title}</span>
-            </div>`;
+        div.onclick = () => openLightboxImg(item.full);
+        div.innerHTML = `<img src="${item.thumb}" alt="${item.title}" loading="lazy"><div class="thumb-label"><span class="text-[9px] font-bold tracking-wider uppercase text-white/60">${item.title}</span></div>`;
         g.appendChild(div);
     });
-    // Pagination
     const p = document.getElementById('galeriPagination');
     p.innerHTML = '';
-    // Prev
+    if (totalGaleriPages <= 1) return;
     const prev = document.createElement('button');
     prev.className = 'page-btn';
     prev.innerHTML = '<span class="iconify" data-icon="mdi:chevron-left" data-width="18"></span>';
-    prev.disabled = page === 1;
     prev.style.opacity = page === 1 ? '0.3' : '1';
     prev.onclick = () => { if(page > 1) renderGaleri(page - 1); };
     p.appendChild(prev);
-    // Numbers
     for (let i = 1; i <= totalGaleriPages; i++) {
         const btn = document.createElement('button');
         btn.className = 'page-btn' + (i === page ? ' active' : '');
@@ -662,18 +539,15 @@ function renderGaleri(page) {
         btn.onclick = () => renderGaleri(i);
         p.appendChild(btn);
     }
-    // Next
     const next = document.createElement('button');
     next.className = 'page-btn';
     next.innerHTML = '<span class="iconify" data-icon="mdi:chevron-right" data-width="18"></span>';
-    next.disabled = page === totalGaleriPages;
     next.style.opacity = page === totalGaleriPages ? '0.3' : '1';
     next.onclick = () => { if(page < totalGaleriPages) renderGaleri(page + 1); };
     p.appendChild(next);
 }
 renderGaleri(1);
 
-// ===== SEARCH =====
 function filterStudents() {
     const q = document.getElementById('searchInput').value.toLowerCase().trim();
     const cards = grid.querySelectorAll('.student-card');
@@ -686,7 +560,6 @@ function filterStudents() {
     document.getElementById('noResults').classList.toggle('show', visible === 0);
 }
 
-// ===== POPUP =====
 function openPopup(data) {
     document.getElementById('popup-photo1').src = data.photo1;
     document.getElementById('popup-photo2').src = data.photo2;
@@ -699,77 +572,51 @@ function openPopup(data) {
 function closeStudentPopup() { document.getElementById('studentPopup').classList.remove('active'); document.body.style.overflow = ''; }
 function openStudentPopup(i) {
     const s = students[i];
-    openPopup({ name:s.name, role:s.role, photo1:`https://picsum.photos/seed/${s.s1}/400/533.jpg`, photo2:`https://picsum.photos/seed/${s.s2}/400/533.jpg`, quote:s.quote });
-}
-function openGuruPopup() {
-    openPopup({ name:'Drs. Hendra Wijaya, M.Pd', role:'Guru Produktif RPL — 18 Tahun Pengalaman', photo1:'https://picsum.photos/seed/guru-hendra-formal/500/667.jpg', photo2:'https://picsum.photos/seed/guru-hendra-casual/500/667.jpg', quote:'Pendidikan bukan tentang mengisi ember kosong, tapi menyalakan api semangat belajar yang tak pernah padam. Setiap siswa punya potensi luar biasa — tugas kita adalah membantu mereka menemukannya sendiri.' });
+    openPopup({ name:s.name, role:s.role, photo1:s.s1, photo2:s.s2, quote:s.quote });
 }
 
-// ===== LIGHTBOX =====
+function openGuruPopup() {
+    openPopup({
+        name: "Drs. Hendra Wijaya, M.Pd",
+        role: "Guru Produktif RPL — 18 Tahun Pengalaman",
+        photo1: "https://picsum.photos/seed/guruformal/500/667",
+        photo2: "https://picsum.photos/seed/gurucasual/500/667",
+        quote: "Pendidikan bukan tentang mengisi ember kosong, tapi menyalakan api semangat belajar yang tak pernah padam. Setiap siswa punya potensi luar biasa — tugas kita adalah membantu mereka menemukannya sendiri."
+    });
+}
+
 function openLightbox(el) { document.getElementById('lightbox-img').src = el.querySelector('img').src; document.getElementById('lightbox').classList.add('active'); document.body.style.overflow = 'hidden'; }
 function openLightboxImg(src) { document.getElementById('lightbox-img').src = src; document.getElementById('lightbox').classList.add('active'); document.body.style.overflow = 'hidden'; }
 function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); document.body.style.overflow = ''; }
 document.addEventListener('keydown', e => { if(e.key==='Escape'){closeLightbox();closeStudentPopup();} });
 
-// ===== MOBILE MENU =====
 let menuOpen = false;
 function toggleMobileMenu() { menuOpen=!menuOpen; document.getElementById('mobileMenu').classList.toggle('active',menuOpen); document.body.style.overflow=menuOpen?'hidden':''; document.getElementById('menuIcon').setAttribute('data-icon',menuOpen?'mdi:close':'mdi:menu'); }
 function closeMobileMenu() { menuOpen=false; document.getElementById('mobileMenu').classList.remove('active'); document.body.style.overflow=''; document.getElementById('menuIcon').setAttribute('data-icon','mdi:menu'); }
 
-// ===== THEME =====
-function toggleTheme() {
-    const h = document.documentElement; const dark = h.dataset.theme==='dark';
-    h.dataset.theme = dark?'light':'dark';
-    document.querySelector('.theme-icon-dark').style.display = dark?'none':'';
-    document.querySelector('.theme-icon-light').style.display = dark?'':'none';
-    localStorage.setItem('theme', h.dataset.theme);
-}
-(function(){ const s=localStorage.getItem('theme'); if(s){document.documentElement.dataset.theme=s; document.querySelector('.theme-icon-dark').style.display=s==='dark'?'':'none'; document.querySelector('.theme-icon-light').style.display=s==='dark'?'none':'';} })();
+function toggleTheme() { const h=document.documentElement;const d=h.dataset.theme==='dark';h.dataset.theme=d?'light':'dark';document.querySelector('.theme-icon-dark').style.display=d?'none':'';document.querySelector('.theme-icon-light').style.display=d?'':'none';localStorage.setItem('theme',h.dataset.theme); }
+(function(){const s=localStorage.getItem('theme');if(s){document.documentElement.dataset.theme=s;document.querySelector('.theme-icon-dark').style.display=s==='dark'?'':'none';document.querySelector('.theme-icon-light').style.display=s==='dark'?'none':'';}})();
 
-// ===== HERO CAROUSEL =====
 let currentSlide = 0;
 const slides = document.querySelectorAll('.hero-slide');
 const dots = document.querySelectorAll('.carousel-dot');
-function goToSlide(n) {
-    slides[currentSlide].classList.remove('active');
-    dots[currentSlide].classList.remove('active');
-    currentSlide = n;
-    slides[currentSlide].classList.add('active');
-    dots[currentSlide].classList.add('active');
-}
+function goToSlide(n) { slides[currentSlide].classList.remove('active');dots[currentSlide].classList.remove('active');currentSlide=n;slides[currentSlide].classList.add('active');dots[currentSlide].classList.add('active'); }
 setInterval(() => goToSlide((currentSlide + 1) % slides.length), 5000);
 
-// ===== TYPEWRITER =====
-const phrases = [
-    'Membangun Masa Depan Digital',
-    'Melalui Kode & Kreativitas',
-    'Generasi Software Developer Siap Kerja',
-    'Inovasi Tanpa Batas untuk Indonesia'
-];
+const phrases = ['Membangun Masa Depan Digital','Melalui Kode & Kreativitas','Generasi Software Developer Siap Kerja','Inovasi Tanpa Batas untuk Indonesia'];
 let phraseIdx = 0, charIdx = 0, isDeleting = false;
 const tw = document.getElementById('typewriter');
 function typeLoop() {
     const current = phrases[phraseIdx];
-    if (!isDeleting) {
-        tw.textContent = current.substring(0, charIdx + 1);
-        charIdx++;
-        if (charIdx === current.length) { isDeleting = true; setTimeout(typeLoop, 2000); return; }
-        setTimeout(typeLoop, 60);
-    } else {
-        tw.textContent = current.substring(0, charIdx - 1);
-        charIdx--;
-        if (charIdx === 0) { isDeleting = false; phraseIdx = (phraseIdx + 1) % phrases.length; setTimeout(typeLoop, 400); return; }
-        setTimeout(typeLoop, 30);
-    }
+    if (!isDeleting) { tw.textContent = current.substring(0, charIdx + 1); charIdx++; if (charIdx === current.length) { isDeleting = true; setTimeout(typeLoop, 2000); return; } setTimeout(typeLoop, 60); }
+    else { tw.textContent = current.substring(0, charIdx - 1); charIdx--; if (charIdx === 0) { isDeleting = false; phraseIdx = (phraseIdx + 1) % phrases.length; setTimeout(typeLoop, 400); return; } setTimeout(typeLoop, 30); }
 }
 setTimeout(typeLoop, 1200);
 
-// ===== SCROLL REVEAL =====
 const obs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            entry.target.querySelectorAll('.skill-fill').forEach(b => { b.style.width = b.dataset.width; });
             const counter = entry.target.querySelector('.stat-number');
             if (counter && !counter.dataset.done) { counter.dataset.done='1'; animateCounter(counter, parseInt(counter.dataset.count)); }
             obs.unobserve(entry.target);
@@ -780,52 +627,28 @@ document.querySelectorAll('.sr,.sr-l,.sr-r,.sr-s').forEach(el => obs.observe(el)
 
 function animateCounter(el, target) {
     const start = performance.now(), dur = 1400;
-    function update(now) {
-        const p = Math.min((now-start)/dur,1), e = 1-Math.pow(1-p,4);
-        el.textContent = Math.floor(e*target) + (target===1?'':'+');
-        if(p<1) requestAnimationFrame(update); else el.textContent = target+(target===1?'':'+');
-    }
+    function update(now) { const p = Math.min((now-start)/dur,1),e=1-Math.pow(1-p,4); el.textContent = Math.floor(e*target)+(target===1?'':'+'); if(p<1) requestAnimationFrame(update); else el.textContent = target+(target===1?'':'+'); }
     requestAnimationFrame(update);
 }
 
-// ===== NAV & SCROLL =====
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-link');
 let lastScroll = 0;
 const nav = document.querySelector('nav');
 const scrollProgress = document.getElementById('scrollProgress');
-
 window.addEventListener('scroll', () => {
     const y = window.scrollY;
-    // Progress bar
-    const h = document.documentElement.scrollHeight - window.innerHeight;
-    scrollProgress.style.width = (y / h * 100) + '%';
-    // Nav hide/show
-    if (y > lastScroll && y > 80) nav.style.transform = 'translateY(-100%)';
-    else nav.style.transform = 'translateY(0)';
+    scrollProgress.style.width = (y / (document.documentElement.scrollHeight - window.innerHeight) * 100) + '%';
+    if (y > lastScroll && y > 80) nav.style.transform = 'translateY(-100%)'; else nav.style.transform = 'translateY(0)';
     nav.style.transition = 'transform .35s ease';
     lastScroll = y;
-    // Back to top
     const btn = document.getElementById('backToTop');
-    btn.style.opacity = y > 500 ? '1' : '0';
-    btn.style.pointerEvents = y > 500 ? 'all' : 'none';
-    // Active nav
-    sections.forEach(sec => {
-        const top = sec.offsetTop - 120;
-        if (y >= top && y < top + sec.offsetHeight) {
-            navLinks.forEach(l => { l.classList.toggle('active', l.getAttribute('href') === `#${sec.id}`); });
-        }
-    });
+    btn.style.opacity = y > 500 ? '1' : '0'; btn.style.pointerEvents = y > 500 ? 'all' : 'none';
+    sections.forEach(sec => { const top = sec.offsetTop - 120; if (y >= top && y < top + sec.offsetHeight) { navLinks.forEach(l => { l.classList.toggle('active', l.getAttribute('href') === `#${sec.id}`); }); } });
 });
 
-// ===== CURSOR GLOW =====
 const glow = document.getElementById('cursorGlow');
-if (glow) {
-    document.addEventListener('mousemove', e => {
-        glow.style.left = e.clientX + 'px';
-        glow.style.top = e.clientY + 'px';
-    });
-}
+if (glow) { document.addEventListener('mousemove', e => { glow.style.left = e.clientX + 'px'; glow.style.top = e.clientY + 'px'; }); }
 </script>
 </body>
 </html>
