@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelas 12 RPL — Rekayasa Perangkat Lunak</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* ===== THEME VARIABLES ===== */
+        :root {
+            --bg-base: #050508;
+            --bg-surface: #0a0a10;
+            --bg-elevated: #101018;
+            --bg-card: rgba(255,255,255,0.02);
+            --bg-card-hover: rgba(37,99,235,0.06);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255,255,255,0.55);
+            --text-tertiary: rgba(255,255,255,0.28);
+            --text-muted: rgba(255,255,255,0.08);
+            --border: rgba(255,255,255,0.07);
+            --border-light: rgba(255,255,255,0.03);
+            --accent: #2563EB;
+            --accent-hover: #3B82F6;
+            --accent-bg: rgba(37,99,235,0.08);
+            --accent-border: rgba(37,99,235,0.25);
+            --nav-bg: rgba(5,5,8,0.82);
+            --overlay-bg: rgba(5,5,8,0.88);
+            --input-bg: rgba(255,255,255,0.03);
+            --noise-opacity: 0.03;
+            --img-filter: grayscale(100%) contrast(1.1);
+            --img-filter-hover: grayscale(30%) contrast(1.05);
+            --shadow-card: 0 4px 30px rgba(0,0,0,0.3);
+            --shadow-popup: 0 25px 80px rgba(0,0,0,0.5);
+        }
+
+        [data-theme="light"] {
+            --bg-base: #f0f2f5;
+            --bg-surface: #ffffff;
+            --bg-elevated: #ffffff;
+            --bg-card: rgba(0,0,0,0.025);
+            --bg-card-hover: rgba(37,99,235,0.04);
+            --text-primary: #0f172a;
+            --text-secondary: rgba(15,23,42,0.55);
+            --text-tertiary: rgba(15,23,42,0.3);
+            --text-muted: rgba(15,23,42,0.06);
+            --border: rgba(15,23,42,0.08);
+            --border-light: rgba(15,23,42,0.04);
+            --accent: #2563EB;
+            --accent-hover: #1D4ED8;
+            --accent-bg: rgba(37,99,235,0.06);
+            --accent-border: rgba(37,99,235,0.18);
+            --nav-bg: rgba(255,255,255,0.82);
+            --overlay-bg: rgba(240,242,245,0.88);
+            --input-bg: rgba(0,0,0,0.03);
+            --noise-opacity: 0.015;
+            --img-filter: grayscale(80%) contrast(1.05);
+            --img-filter-hover: grayscale(0%) contrast(1);
+            --shadow-card: 0 4px 30px rgba(0,0,0,0.06);
+            --shadow-popup: 0 25px 80px rgba(0,0,0,0.12);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            background: var(--bg-base);
+            color: var(--text-primary);
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        ::selection { background: var(--accent); color: #fff; }
+
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--bg-base); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        .noise-bg {
+            position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+            opacity: var(--noise-opacity);
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            transition: opacity 0.5s ease;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+        @keyframes lineGrow { from { width:0; } to { width:80px; } }
+        @keyframes marquee { 0% { transform:translateX(0); } 100% { transform:translateX(-50%); } }
+
+        .anim-fadeInUp { animation: fadeInUp 0.8s ease-out forwards; }
+        .anim-fadeIn { animation: fadeIn 1s ease-out forwards; }
+        .anim-lineGrow { animation: lineGrow 0.8s ease-out forwards; }
+        .anim-marquee { animation: marquee 25s linear infinite; }
+
+        .d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.3s}
+        .d4{animation-delay:.4s}.d5{animation-delay:.5s}.d6{animation-delay:.6s}
+        .d7{animation-delay:.7s}.d8{animation-delay:.8s}
+
+        /* ===== SCROLL REVEAL ===== */
+        .sr { opacity:0; transform:translateY(40px); transition: all 0.8s cubic-bezier(0.16,1,0.3,1); }
+        .sr.visible { opacity:1; transform:translateY(0); }
+        .sr-l { opacity:0; transform:translateX(-50px); transition: all 0.8s cubic-bezier(0.16,1,0.3,1); }
+        .sr-l.visible { opacity:1; transform:translateX(0); }
+        .sr-r { opacity:0; transform:translateX(50px); transition: all 0.8s cubic-bezier(0.16,1,0.3,1); }
+        .sr-r.visible { opacity:1; transform:translateX(0); }
+        .sr-s { opacity:0; transform:scale(0.92); transition: all 0.6s cubic-bezier(0.16,1,0.3,1); }
+        .sr-s.visible { opacity:1; transform:scale(1); }
+
+        /* ===== TYPOGRAPHY ===== */
+        .hero-title {
+            font-size: clamp(2.8rem, 11vw, 10rem);
+            font-weight: 900; line-height: 0.88;
+            letter-spacing: -0.05em; text-transform: uppercase;
+        }
+        .hero-sub {
+            font-size: clamp(0.7rem, 1.8vw, 1rem);
+            letter-spacing: 0.3em; text-transform: uppercase;
+        }
+        .section-title {
+            font-size: clamp(1.8rem, 5vw, 3.8rem);
+            font-weight: 900; line-height: 1;
+            letter-spacing: -0.04em; text-transform: uppercase;
+        }
+        .section-label {
+            font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 0.25em; text-transform: uppercase;
+            color: var(--accent);
+        }
+        .stat-number {
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 900; line-height: 1; letter-spacing: -0.04em;
+            color: var(--accent);
+        }
+
+        /* ===== NAV ===== */
+        .nav-link {
+            position: relative; font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 0.15em; text-transform: uppercase;
+            color: var(--text-secondary); transition: color 0.3s;
+        }
+        .nav-link:hover, .nav-link.active { color: var(--text-primary); }
+        .nav-link::after {
+            content:''; position:absolute; bottom:-4px; left:0;
+            width:0; height:2px; background:var(--accent); transition:width 0.3s;
+        }
+        .nav-link:hover::after, .nav-link.active::after { width:100%; }
+
+        /* ===== BUTTONS ===== */
+        .btn-accent {
+            position: relative; overflow: hidden;
+            font-size: 0.7rem; font-weight: 800;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            background: var(--accent); color: #fff;
+            padding: 0.875rem 2rem; border-radius: 4px;
+            transition: background 0.3s;
+        }
+        .btn-accent:hover { background: var(--accent-hover); }
+
+        .btn-outline {
+            font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            padding: 0.875rem 2rem; border-radius: 4px;
+            border: 1px solid var(--border); color: var(--text-secondary);
+            transition: all 0.3s;
+        }
+        .btn-outline:hover { border-color: var(--accent-border); color: var(--accent); }
+
+        /* ===== GALLERY ===== */
+        .gallery-item { overflow: hidden; position: relative; border-radius: 4px; cursor: pointer; }
+        .gallery-item img {
+            transition: transform 0.7s cubic-bezier(0.16,1,0.3,1), filter 0.7s ease;
+            filter: var(--img-filter);
+        }
+        .gallery-item:hover img { transform: scale(1.06); filter: var(--img-filter-hover); }
+        .gallery-item .g-overlay {
+            position:absolute; inset:0;
+            background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%);
+            opacity:0; transition: opacity 0.5s;
+        }
+        .gallery-item:hover .g-overlay { opacity:1; }
+        .gallery-item .g-caption {
+            position:absolute; bottom:0; left:0; right:0; padding:1.25rem;
+            transform:translateY(15px); opacity:0;
+            transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
+        }
+        .gallery-item:hover .g-caption { transform:translateY(0); opacity:1; }
+
+        /* ===== STUDENT CARD ===== */
+        .student-card {
+            background: var(--bg-card); border: 1px solid var(--border-light);
+            border-radius: 6px; overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+            box-shadow: var(--shadow-card);
+        }
+        .student-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent-border);
+            background: var(--bg-card-hover);
+        }
+        .student-card.hidden-card {
+            opacity: 0; transform: scale(0.8);
+            pointer-events: none; position: absolute;
+        }
+
+        .photo-wrap { position: relative; overflow: hidden; aspect-ratio: 3/4; cursor: pointer; }
+        .photo-wrap img {
+            position: absolute; inset: 0; width: 100%; height: 100%;
+            object-fit: cover; transition: opacity 0.5s ease, filter 0.5s ease;
+        }
+        .photo-front { opacity: 1; filter: var(--img-filter); z-index: 1; }
+        .photo-back { opacity: 0; filter: var(--img-filter-hover); z-index: 2; }
+        .photo-wrap:hover .photo-front { opacity: 0; }
+        .photo-wrap:hover .photo-back { opacity: 1; }
+
+        /* ===== SKILL BARS ===== */
+        .skill-fill {
+            height: 100%; border-radius: 999px;
+            background: var(--accent); width: 0;
+            transition: width 1.2s cubic-bezier(0.16,1,0.3,1);
+        }
+
+        /* ===== POPUP ===== */
+        .student-popup {
+            position: fixed; inset: 0; z-index: 100;
+            display: flex; align-items: center; justify-content: center;
+            padding: 1rem;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        .student-popup.active { opacity: 1; pointer-events: all; }
+        .student-popup .popup-bg {
+            position: absolute; inset: 0;
+            background: var(--overlay-bg);
+            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+        }
+        .student-popup .popup-card {
+            position: relative; z-index: 1;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            max-width: 640px; width: 100%;
+            box-shadow: var(--shadow-popup);
+            transform: scale(0.92) translateY(20px);
+            transition: transform 0.5s cubic-bezier(0.16,1,0.3,1);
+            overflow: hidden;
+        }
+        .student-popup.active .popup-card { transform: scale(1) translateY(0); }
+
+        /* ===== LIGHTBOX ===== */
+        .lightbox {
+            position: fixed; inset: 0; z-index: 100;
+            background: var(--overlay-bg);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.4s;
+        }
+        .lightbox.active { opacity: 1; pointer-events: all; }
+        .lightbox img {
+            max-width: 90vw; max-height: 85vh; object-fit: contain;
+            border-radius: 6px; transform: scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+        }
+        .lightbox.active img { transform: scale(1); }
+
+        /* ===== MOBILE MENU ===== */
+        .mobile-menu {
+            position: fixed; inset: 0; z-index: 90;
+            background: var(--bg-base);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center; gap: 2rem;
+            transform: translateX(100%);
+            transition: transform 0.5s cubic-bezier(0.16,1,0.3,1), background 0.5s;
+        }
+        .mobile-menu.active { transform: translateX(0); }
+        .mobile-menu a {
+            font-size: 1.3rem; font-weight: 800;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--text-tertiary); transition: color 0.3s;
+        }
+        .mobile-menu a:hover { color: var(--accent); }
+
+        /* ===== THEME TOGGLE ===== */
+        .theme-toggle {
+            width: 40px; height: 40px; border-radius: 8px;
+            border: 1px solid var(--border); background: var(--bg-card);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--text-secondary); cursor: pointer;
+            transition: all 0.3s;
+        }
+        .theme-toggle:hover { border-color: var(--accent-border); color: var(--accent); }
+
+        /* ===== SEARCH ===== */
+        .search-box {
+            background: var(--input-bg); border: 1px solid var(--border);
+            border-radius: 8px; padding: 0.75rem 1rem 0.75rem 2.75rem;
+            color: var(--text-primary); font-size: 0.875rem;
+            width: 100%; outline: none; transition: border-color 0.3s;
+        }
+        .search-box::placeholder { color: var(--text-tertiary); }
+        .search-box:focus { border-color: var(--accent-border); }
+
+        /* ===== FORM INPUT ===== */
+        .form-input {
+            width: 100%; background: var(--input-bg);
+            border: 1px solid var(--border); border-radius: 6px;
+            padding: 0.75rem 1rem; font-size: 0.875rem;
+            color: var(--text-primary); outline: none;
+            transition: border-color 0.3s;
+        }
+        .form-input::placeholder { color: var(--text-tertiary); }
+        .form-input:focus { border-color: var(--accent-border); }
+
+        /* ===== MISC ===== */
+        .divider { height: 1px; background: linear-gradient(to right, transparent, var(--border), transparent); }
+        .accent-line { height: 2px; width: 48px; background: var(--accent); border-radius: 1px; }
+        .marquee-track { display: flex; width: max-content; }
+        .counter-line { height: 1px; background: linear-gradient(to right, transparent, var(--border), transparent); }
+
+        /* ===== NO RESULTS ===== */
+        .no-results {
+            display: none; text-align: center; padding: 3rem 1rem;
+            color: var(--text-tertiary);
+        }
+        .no-results.show { display: block; }
+    </style>
+</head>
+<body class="font-sans antialiased overflow-x-hidden">
+
+<div class="noise-bg"></div>
+
+<!-- ===== LIGHTBOX ===== -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button onclick="closeLightbox()" class="absolute top-5 right-5 z-10" style="color:var(--text-tertiary);">
+        <span class="iconify" data-icon="mdi:close" data-width="28"></span>
+    </button>
+    <img id="lightbox-img" src="" alt="Gallery">
+</div>
+
+<!-- ===== STUDENT POPUP ===== -->
+<div class="student-popup" id="studentPopup">
+    <div class="popup-bg" onclick="closeStudentPopup()"></div>
+    <div class="popup-card">
+        <button onclick="closeStudentPopup()" class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full flex items-center justify-center transition-colors" style="background:var(--bg-card);color:var(--text-tertiary);border:1px solid var(--border);" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-tertiary)'">
+            <span class="iconify" data-icon="mdi:close" data-width="16"></span>
+        </button>
+        <div class="flex flex-col md:flex-row">
+            <!-- Left: Photo -->
+            <div class="md:w-2/5 flex-shrink-0">
+                <div class="photo-wrap aspect-[3/4] md:aspect-auto md:h-full">
+                    <img id="popup-photo1" src="" alt="" class="photo-front">
+                    <img id="popup-photo2" src="" alt="" class="photo-back">
+                </div>
+            </div>
+            <!-- Right: Info -->
+            <div class="flex-1 p-6 md:p-8 flex flex-col justify-center">
+                <span class="text-[10px] font-bold tracking-[0.2em] uppercase" style="color:var(--accent);" id="popup-role">Role</span>
+                <h3 class="text-2xl md:text-3xl font-black tracking-tight mt-2" style="color:var(--text-primary);" id="popup-name">Name</h3>
+                <div class="accent-line mt-4 mb-5"></div>
+                <p class="text-sm leading-relaxed" style="color:var(--text-secondary);" id="popup-quote">Quote</p>
+                <div class="mt-6 flex items-center gap-2" style="color:var(--text-tertiary);">
+                    <span class="iconify" data-icon="mdi:information-outline" data-width="14"></span>
+                    <span class="text-[10px] font-semibold tracking-wider uppercase">Hover foto untuk melihat foto lain</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== MOBILE MENU ===== -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#home" onclick="closeMobileMenu()">Beranda</a>
+    <a href="#about" onclick="closeMobileMenu()">Tentang</a>
+    <a href="#gallery" onclick="closeMobileMenu()">Galeri</a>
+    <a href="#students" onclick="closeMobileMenu()">Anggota</a>
+    <a href="#contact" onclick="closeMobileMenu()">Kontak</a>
+</div>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="fixed top-0 left-0 right-0 z-50" style="background:var(--nav-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border-light);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
+        <a href="#home" class="flex items-center gap-2.5">
+            <div class="w-7 h-7 sm:w-8 sm:h-8 rounded flex items-center justify-center" style="background:var(--accent);">
+                <span class="text-white font-black text-xs sm:text-sm">R</span>
+            </div>
+            <span class="font-extrabold text-xs tracking-[0.15em] uppercase hidden sm:block" style="color:var(--text-primary);">12 RPL</span>
+        </a>
+        <div class="hidden md:flex items-center gap-7">
+            <a href="#home" class="nav-link active">Beranda</a>
+            <a href="#about" class="nav-link">Tentang</a>
+            <a href="#gallery" class="nav-link">Galeri</a>
+            <a href="#students" class="nav-link">Anggota</a>
+            <a href="#contact" class="nav-link">Kontak</a>
+        </div>
+        <div class="flex items-center gap-2 sm:gap-3">
+            <button class="theme-toggle" onclick="toggleTheme()" title="Ganti tema">
+                <span class="iconify theme-icon-dark" data-icon="mdi:weather-sunny" data-width="18"></span>
+                <span class="iconify theme-icon-light" data-icon="mdi:weather-night" data-width="18" style="display:none;"></span>
+            </button>
+            <a href="#about" class="btn-accent hidden sm:inline-flex" style="padding:0.5rem 1.25rem;">Explore</a>
+            <button class="md:hidden" style="color:var(--text-primary);" onclick="toggleMobileMenu()">
+                <span class="iconify" data-icon="mdi:menu" data-width="24" id="menuIcon"></span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.035]" style="background-image:linear-gradient(var(--text-primary) 1px,transparent 1px),linear-gradient(90deg,var(--text-primary) 1px,transparent 1px);background-size:60px 60px;"></div>
+    <div class="absolute inset-0" style="background:radial-gradient(ellipse at 50% 40%, rgba(37,99,235,0.06) 0%, transparent 65%);"></div>
+
+    <div class="relative z-10 text-center px-4 sm:px-6 max-w-6xl mx-auto">
+        <div class="anim-fadeIn opacity-0 d2 mb-4 sm:mb-6">
+            <span class="hero-sub" style="color:var(--text-tertiary);">Rekayasa Perangkat Lunak — 2024/2025</span>
+        </div>
+        <h1 class="hero-title anim-fadeInUp opacity-0 d3" style="color:var(--text-primary);">
+            KELAS<br>
+            <span style="color:var(--accent); opacity:0.35;">12</span> RPL
+        </h1>
+        <div class="flex justify-center mt-6 sm:mt-8 mb-6 sm:mb-8 anim-fadeIn opacity-0 d5">
+            <div class="accent-line anim-lineGrow" style="width:80px;"></div>
+        </div>
+        <p class="text-sm sm:text-base max-w-lg mx-auto leading-relaxed anim-fadeInUp opacity-0 d6" style="color:var(--text-secondary);">
+            Membangun masa depan digital melalui kode, kreativitas, dan kolaborasi. Generasi pengembang perangkat lunak siap menghadapi tantangan industri teknologi.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mt-8 sm:mt-10 anim-fadeInUp opacity-0 d7">
+            <a href="#gallery" class="btn-accent inline-flex items-center gap-2">
+                Lihat Galeri
+                <span class="iconify" data-icon="mdi:arrow-down" data-width="14"></span>
+            </a>
+            <a href="#students" class="btn-outline">Anggota Kelas</a>
+        </div>
+    </div>
+
+    <div class="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 anim-fadeIn opacity-0 d8">
+        <span class="text-[9px] font-bold tracking-[0.3em] uppercase" style="color:var(--text-tertiary);">Scroll</span>
+        <div class="w-px h-7 relative overflow-hidden" style="background:var(--border);">
+            <div class="w-full h-2.5 absolute animate-bounce" style="background:var(--accent);"></div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== MARQUEE ===== -->
+<div class="py-3 overflow-hidden" style="border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light);">
+    <div class="marquee-track anim-marquee">
+        <span class="font-black text-xs sm:text-sm tracking-[0.3em] uppercase whitespace-nowrap mx-6 sm:mx-8" style="color:var(--text-muted);">Rekayasa Perangkat Lunak</span>
+        <span style="color:var(--accent);opacity:0.3;" class="mx-3">✦</span>
+        <span class="font-black text-xs sm:text-sm tracking-[0.3em] uppercase whitespace-nowrap mx-6 sm:mx-8" style="color:var(--text-muted);">Software Engineering</span>
+        <span style="color:var(--accent);opacity:0.3;" class="mx-3">✦</span>
+        <span class="font-black text-xs sm:text-sm tracking-[0.3em] uppercase whitespace-nowrap mx-6 sm:mx-8" style="color:var(--text-muted);">Kelas 12 RPL</span>
+        <span style="color:var(--accent);opacity:0.3;" class="mx-3">✦</span>
+        <span class="font-black text-xs sm:text-sm tracking-[0.3em] uppercase whitespace-nowrap mx-6 sm:mx-8" style="color:var(--text-muted);">Coding & Development</span>
+        <span style="color:var(--accent);opacity:0.3;" class="mx-3">✦</span>
+        <span class="font-black text-xs sm:text-sm tracking-[0.3em] uppercase whitespace-nowrap mx-6 sm:mx-8" style="color:var(--text-muted);">Rekayasa Perangkat Lunak</span>
+        <span style="color:var(--accent);opacity:0.3;" class="mx-3">✦</span>
+        <span class="font-black text-xs sm:text-sm tracking-[0.3em] uppercase whitespace-nowrap mx-6 sm:mx-8" style="color:var(--text-muted);">Software Engineering</span>
+        <span style="color:var(--accent);opacity:0.3;" class="mx-3">✦</span>
+        <span class="font-black text-xs sm:text-sm tracking-[0.3em] uppercase whitespace-nowrap mx-6 sm:mx-8" style="color:var(--text-muted);">Kelas 12 RPL</span>
+        <span style="color:var(--accent);opacity:0.3;" class="mx-3">✦</span>
+        <span class="font-black text-xs sm:text-sm tracking-[0.3em] uppercase whitespace-nowrap mx-6 sm:mx-8" style="color:var(--text-muted);">Coding & Development</span>
+        <span style="color:var(--accent);opacity:0.3;" class="mx-3">✦</span>
+    </div>
+</div>
+
+<!-- ===== STATS ===== -->
+<section class="py-16 sm:py-20" style="border-bottom:1px solid var(--border-light);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 md:gap-0 md:divide-x" style="--tw-divide-opacity:1;--tw-divide-color:var(--border);">
+            <div class="text-center sr" style="transition-delay:0s;">
+                <div class="stat-number" data-count="36">0</div>
+                <div class="text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase mt-2" style="color:var(--text-tertiary);">Siswa</div>
+            </div>
+            <div class="text-center sr" style="transition-delay:0.1s;">
+                <div class="stat-number" data-count="12">0</div>
+                <div class="text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase mt-2" style="color:var(--text-tertiary);">Project</div>
+            </div>
+            <div class="text-center sr" style="transition-delay:0.2s;">
+                <div class="stat-number" data-count="8">0</div>
+                <div class="text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase mt-2" style="color:var(--text-tertiary);">Prestasi</div>
+            </div>
+            <div class="text-center sr" style="transition-delay:0.3s;">
+                <div class="stat-number" data-count="1">0</div>
+                <div class="text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase mt-2" style="color:var(--text-tertiary);">Keluarga</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about" class="py-20 sm:py-28 md:py-32">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+            <div class="sr-l relative">
+                <div class="aspect-[4/5] rounded-lg overflow-hidden relative" style="border:1px solid var(--border);">
+                    <img src="https://picsum.photos/seed/rpl-about-class/800/1000.jpg" alt="Kelas RPL" class="w-full h-full object-cover" style="filter:var(--img-filter);">
+                    <div class="absolute inset-0" style="background:linear-gradient(to top, var(--bg-base) 0%, transparent 50%);"></div>
+                </div>
+                <div class="absolute -bottom-4 -right-2 sm:right-6 rounded-lg px-5 py-4" style="background:var(--bg-elevated);border:1px solid var(--border);box-shadow:var(--shadow-card);">
+                    <div class="text-2xl font-black" style="color:var(--accent);">RPL</div>
+                    <div class="text-[9px] font-bold tracking-[0.2em] uppercase mt-0.5" style="color:var(--text-tertiary);">Since 2022</div>
+                </div>
+            </div>
+            <div class="sr-r">
+                <span class="section-label">Tentang Kami</span>
+                <div class="accent-line mt-3 mb-5"></div>
+                <h2 class="section-title" style="color:var(--text-primary);">
+                    MEMBANGUN<br>
+                    <span style="color:var(--text-muted);">MASA DEPAN</span><br>
+                    DIGITAL
+                </h2>
+                <p class="text-sm leading-relaxed mt-5 mb-4" style="color:var(--text-secondary);">
+                    Kelas 12 Rekayasa Perangkat Lunak adalah kelas jurusan di SMK yang berfokus pada pengembangan perangkat lunak. Kami belajar mulai dari dasar pemrograman, basis data, hingga pengembangan aplikasi web dan mobile.
+                </p>
+                <p class="text-sm leading-relaxed mb-8" style="color:var(--text-secondary);">
+                    Dengan bimbingan guru berpengalaman dan semangat belajar tinggi, kami terus mengasah kemampuan menjadi software developer profesional dan siap kerja.
+                </p>
+                <div class="space-y-3.5">
+                    <div class="flex items-center gap-3">
+                        <div class="w-7 h-7 rounded flex items-center justify-center flex-shrink-0" style="background:var(--accent-bg);">
+                            <span class="iconify" data-icon="mdi:language-html5" data-width="15" style="color:var(--accent);"></span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-[11px] font-bold tracking-wider uppercase" style="color:var(--text-secondary);">HTML & CSS</span>
+                                <span class="text-[11px] font-bold" style="color:var(--text-tertiary);">90%</span>
+                            </div>
+                            <div class="h-1 rounded-full overflow-hidden" style="background:var(--border-light);">
+                                <div class="skill-fill" data-width="90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-7 h-7 rounded flex items-center justify-center flex-shrink-0" style="background:var(--accent-bg);">
+                            <span class="iconify" data-icon="mdi:language-javascript" data-width="15" style="color:var(--accent);"></span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-[11px] font-bold tracking-wider uppercase" style="color:var(--text-secondary);">JavaScript</span>
+                                <span class="text-[11px] font-bold" style="color:var(--text-tertiary);">75%</span>
+                            </div>
+                            <div class="h-1 rounded-full overflow-hidden" style="background:var(--border-light);">
+                                <div class="skill-fill" data-width="75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-7 h-7 rounded flex items-center justify-center flex-shrink-0" style="background:var(--accent-bg);">
+                            <span class="iconify" data-icon="mdi:language-php" data-width="15" style="color:var(--accent);"></span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-[11px] font-bold tracking-wider uppercase" style="color:var(--text-secondary);">PHP & Laravel</span>
+                                <span class="text-[11px] font-bold" style="color:var(--text-tertiary);">70%</span>
+                            </div>
+                            <div class="h-1 rounded-full overflow-hidden" style="background:var(--border-light);">
+                                <div class="skill-fill" data-width="70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-7 h-7 rounded flex items-center justify-center flex-shrink-0" style="background:var(--accent-bg);">
+                            <span class="iconify" data-icon="mdi:database" data-width="15" style="color:var(--accent);"></span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-[11px] font-bold tracking-wider uppercase" style="color:var(--text-secondary);">MySQL</span>
+                                <span class="text-[11px] font-bold" style="color:var(--text-tertiary);">80%</span>
+                            </div>
+                            <div class="h-1 rounded-full overflow-hidden" style="background:var(--border-light);">
+                                <div class="skill-fill" data-width="80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="counter-line max-w-7xl mx-auto"></div>
+
+<!-- ===== GALLERY ===== -->
+<section id="gallery" class="py-20 sm:py-28 md:py-32">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-12 sm:mb-16 sr">
+            <span class="section-label">Dokumentasi</span>
+            <div class="flex justify-center mt-3 mb-5"><div class="accent-line"></div></div>
+            <h2 class="section-title" style="color:var(--text-primary);">GALERI KEGIATAN</h2>
+            <p class="text-xs sm:text-sm mt-4 max-w-md mx-auto" style="color:var(--text-tertiary);">Momen-momen berharga dari berbagai kegiatan kelas 12 RPL.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-3">
+            <div class="gallery-item sm:col-span-2 sm:row-span-2 sr-s" onclick="openLightbox(this)" style="transition-delay:0s;">
+                <div class="aspect-[4/3] sm:aspect-auto sm:h-full"><img src="https://picsum.photos/seed/rpl-code-session/1200/900.jpg" alt="Coding" class="w-full h-full object-cover"></div>
+                <div class="g-overlay"></div>
+                <div class="g-caption"><span class="text-[9px] font-bold tracking-[0.2em] uppercase text-white/40">Workshop</span><h3 class="text-base sm:text-lg font-extrabold tracking-tight mt-1 text-white">Coding Session Bersama</h3></div>
+            </div>
+            <div class="gallery-item sr-s" onclick="openLightbox(this)" style="transition-delay:0.08s;">
+                <div class="aspect-[4/3]"><img src="https://picsum.photos/seed/rpl-discuss-project/800/600.jpg" alt="Meeting" class="w-full h-full object-cover"></div>
+                <div class="g-overlay"></div>
+                <div class="g-caption"><span class="text-[9px] font-bold tracking-[0.2em] uppercase text-white/40">Meeting</span><h3 class="text-sm sm:text-base font-extrabold tracking-tight mt-1 text-white">Diskusi Project</h3></div>
+            </div>
+            <div class="gallery-item sr-s" onclick="openLightbox(this)" style="transition-delay:0.16s;">
+                <div class="aspect-[4/3]"><img src="https://picsum.photos/seed/rpl-demo-app/800/600.jpg" alt="Presentasi" class="w-full h-full object-cover"></div>
+                <div class="g-overlay"></div>
+                <div class="g-caption"><span class="text-[9px] font-bold tracking-[0.2em] uppercase text-white/40">Presentasi</span><h3 class="text-sm sm:text-base font-extrabold tracking-tight mt-1 text-white">Demo Aplikasi</h3></div>
+            </div>
+            <div class="gallery-item sr-s" onclick="openLightbox(this)" style="transition-delay:0s;">
+                <div class="aspect-[4/3]"><img src="https://picsum.photos/seed/rpl-study-tour/800/600.jpg" alt="Outdoor" class="w-full h-full object-cover"></div>
+                <div class="g-overlay"></div>
+                <div class="g-caption"><span class="text-[9px] font-bold tracking-[0.2em] uppercase text-white/40">Outdoor</span><h3 class="text-sm sm:text-base font-extrabold tracking-tight mt-1 text-white">Study Tour</h3></div>
+            </div>
+            <div class="gallery-item sr-s" onclick="openLightbox(this)" style="transition-delay:0.08s;">
+                <div class="aspect-[4/3]"><img src="https://picsum.photos/seed/rpl-competition-it/800/600.jpg" alt="Kompetisi" class="w-full h-full object-cover"></div>
+                <div class="g-overlay"></div>
+                <div class="g-caption"><span class="text-[9px] font-bold tracking-[0.2em] uppercase text-white/40">Kompetisi</span><h3 class="text-sm sm:text-base font-extrabold tracking-tight mt-1 text-white">Lomba IT Nasional</h3></div>
+            </div>
+            <div class="gallery-item sr-s" onclick="openLightbox(this)" style="transition-delay:0.16s;">
+                <div class="aspect-[4/3]"><img src="https://picsum.photos/seed/rpl-report-card/800/600.jpg" alt="Ceremony" class="w-full h-full object-cover"></div>
+                <div class="g-overlay"></div>
+                <div class="g-caption"><span class="text-[9px] font-bold tracking-[0.2em] uppercase text-white/40">Ceremony</span><h3 class="text-sm sm:text-base font-extrabold tracking-tight mt-1 text-white">Penerimaan Rapor</h3></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="counter-line max-w-7xl mx-auto"></div>
+
+<!-- ===== STUDENTS ===== -->
+<section id="students" class="py-20 sm:py-28 md:py-32">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 sm:mb-14 gap-4 sm:gap-6">
+            <div class="sr-l">
+                <span class="section-label">Anggota</span>
+                <div class="accent-line mt-3 mb-5"></div>
+                <h2 class="section-title" style="color:var(--text-primary);">SISWA RPL</h2>
+            </div>
+            <div class="sr-r">
+                <!-- Search -->
+                <div class="relative w-full sm:w-72">
+                    <span class="iconify absolute left-3 top-1/2 -translate-y-1/2" data-icon="mdi:magnify" data-width="18" style="color:var(--text-tertiary);"></span>
+                    <input type="text" id="searchInput" class="search-box" placeholder="Cari nama siswa..." oninput="filterStudents()">
+                </div>
+            </div>
+        </div>
+
+        <!-- Grid -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2.5 sm:gap-3" id="studentsGrid"></div>
+
+        <!-- No results -->
+        <div class="no-results" id="noResults">
+            <span class="iconify mx-auto mb-3" data-icon="mdi:account-search-outline" data-width="48" style="color:var(--text-muted);"></span>
+            <p class="text-sm font-semibold" style="color:var(--text-tertiary);">Siswa tidak ditemukan</p>
+            <p class="text-xs mt-1" style="color:var(--text-muted);">Coba kata kunci lain</p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="py-20 sm:py-28 md:py-32 relative overflow-hidden">
+    <div class="absolute inset-0" style="background:radial-gradient(ellipse at center, rgba(37,99,235,0.05) 0%, transparent 65%);"></div>
+    <div class="absolute inset-0 opacity-[0.025]" style="background-image:linear-gradient(var(--text-primary) 1px,transparent 1px),linear-gradient(90deg,var(--text-primary) 1px,transparent 1px);background-size:40px 40px;"></div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10 sr">
+        <span class="section-label">Bergabunglah</span>
+        <div class="flex justify-center mt-3 mb-7"><div class="accent-line"></div></div>
+        <h2 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter uppercase leading-[0.9]" style="color:var(--text-primary);">
+            SIAP<br>
+            <span style="color:var(--accent);opacity:0.3;">MENULIS</span><br>
+            MASA DEPAN?
+        </h2>
+        <p class="text-xs sm:text-sm mt-7 sm:mt-8 max-w-md mx-auto leading-relaxed" style="color:var(--text-tertiary);">
+            Setiap baris kode yang kita tulis adalah langkah menuju masa depan yang lebih baik.
+        </p>
+        <a href="#contact" class="btn-accent inline-flex items-center gap-2 mt-8 sm:mt-10">
+            Hubungi Kami
+            <span class="iconify" data-icon="mdi:arrow-right" data-width="14"></span>
+        </a>
+    </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact" class="py-20 sm:py-28 md:py-32" style="border-top:1px solid var(--border-light);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="grid md:grid-cols-2 gap-12 md:gap-20">
+            <div class="sr-l">
+                <span class="section-label">Kontak</span>
+                <div class="accent-line mt-3 mb-5"></div>
+                <h2 class="section-title mb-6" style="color:var(--text-primary);">HUBUNGI<br><span style="color:var(--text-muted);">KAMI</span></h2>
+                <p class="text-sm leading-relaxed mb-8 sm:mb-10" style="color:var(--text-secondary);">
+                    Punya pertanyaan atau ingin berkolaborasi? Jangan ragu untuk menghubungi kami.
+                </p>
+                <div class="space-y-5">
+                    <div class="flex items-start gap-3.5">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--accent-bg);">
+                            <span class="iconify" data-icon="mdi:school" data-width="18" style="color:var(--accent);"></span>
+                        </div>
+                        <div>
+                            <div class="text-[10px] font-bold tracking-[0.15em] uppercase mb-0.5" style="color:var(--text-tertiary);">Sekolah</div>
+                            <div class="text-sm" style="color:var(--text-secondary);">SMK Negeri 1 Contoh</div>
+                            <div class="text-xs" style="color:var(--text-tertiary);">Jl. Pendidikan No. 123</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3.5">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--accent-bg);">
+                            <span class="iconify" data-icon="mdi:email-outline" data-width="18" style="color:var(--accent);"></span>
+                        </div>
+                        <div>
+                            <div class="text-[10px] font-bold tracking-[0.15em] uppercase mb-0.5" style="color:var(--text-tertiary);">Email</div>
+                            <div class="text-sm" style="color:var(--text-secondary);">kelas12rpl@smk.sch.id</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3.5">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:var(--accent-bg);">
+                            <span class="iconify" data-icon="mdi:instagram" data-width="18" style="color:var(--accent);"></span>
+                        </div>
+                        <div>
+                            <div class="text-[10px] font-bold tracking-[0.15em] uppercase mb-0.5" style="color:var(--text-tertiary);">Instagram</div>
+                            <div class="text-sm" style="color:var(--text-secondary);">@kelas12rpl</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sr-r">
+                <form id="contactForm" onsubmit="handleSubmit(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-[10px] font-bold tracking-[0.15em] uppercase mb-2" style="color:var(--text-tertiary);">Nama Lengkap</label>
+                        <input type="text" required placeholder="Masukkan nama" class="form-input">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold tracking-[0.15em] uppercase mb-2" style="color:var(--text-tertiary);">Email</label>
+                        <input type="email" required placeholder="Masukkan email" class="form-input">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold tracking-[0.15em] uppercase mb-2" style="color:var(--text-tertiary);">Subjek</label>
+                        <input type="text" required placeholder="Topik pesan" class="form-input">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-bold tracking-[0.15em] uppercase mb-2" style="color:var(--text-tertiary);">Pesan</label>
+                        <textarea rows="5" required placeholder="Tulis pesan..." class="form-input resize-none"></textarea>
+                    </div>
+                    <button type="submit" class="btn-accent w-full">Kirim Pesan</button>
+                    <div id="formMsg" class="hidden text-center text-sm py-3 rounded-lg"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="py-10 sm:py-12" style="border-top:1px solid var(--border-light);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-5">
+            <div class="flex items-center gap-2.5">
+                <div class="w-6 h-6 rounded flex items-center justify-center" style="background:var(--accent);"><span class="text-white font-black text-[10px]">R</span></div>
+                <span class="font-extrabold text-[10px] tracking-[0.15em] uppercase" style="color:var(--text-tertiary);">Kelas 12 RPL</span>
+            </div>
+            <div class="flex items-center gap-5">
+                <a href="#home" class="text-[10px] font-bold tracking-wider uppercase transition-colors" style="color:var(--text-muted);" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">Beranda</a>
+                <a href="#about" class="text-[10px] font-bold tracking-wider uppercase transition-colors" style="color:var(--text-muted);" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">Tentang</a>
+                <a href="#gallery" class="text-[10px] font-bold tracking-wider uppercase transition-colors" style="color:var(--text-muted);" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">Galeri</a>
+                <a href="#students" class="text-[10px] font-bold tracking-wider uppercase transition-colors" style="color:var(--text-muted);" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">Anggota</a>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="#" style="color:var(--text-muted);" class="transition-colors hover:!color-[var(--accent)]" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'"><span class="iconify" data-icon="mdi:instagram" data-width="18"></span></a>
+                <a href="#" style="color:var(--text-muted);" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'"><span class="iconify" data-icon="mdi:github" data-width="18"></span></a>
+                <a href="#" style="color:var(--text-muted);" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'"><span class="iconify" data-icon="mdi:youtube" data-width="18"></span></a>
+            </div>
+        </div>
+        <div class="mt-6 sm:mt-8 pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between gap-3" style="border-top:1px solid var(--border-light);">
+            <p class="text-[10px]" style="color:var(--text-muted);">© 2025 Kelas 12 RPL. All rights reserved.</p>
+            <p class="text-[10px]" style="color:var(--text-muted);">Dibuat dengan <span style="color:var(--accent);">♦</span> oleh siswa RPL</p>
+        </div>
+    </div>
+</footer>
+
+<!-- ===== BACK TO TOP ===== -->
+<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="fixed bottom-5 right-5 sm:bottom-8 sm:right-8 w-9 h-9 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center z-50 transition-all duration-300 opacity-0 pointer-events-none" style="background:var(--bg-card);border:1px solid var(--border);color:var(--text-tertiary);backdrop-filter:blur(8px);">
+    <span class="iconify" data-icon="mdi:arrow-up" data-width="16"></span>
+</button>
+
+<script>
+// ===== STUDENTS DATA =====
+const students = [
+    { name:"Ahmad Fauzi", role:"Ketua Kelas", s1:"ahmad-fauzi-1", s2:"ahmad-fauzi-2", quote:"Kepemimpinan bukan tentang mengendalikan orang, tapi mengarahkan mereka ke tujuan yang sama." },
+    { name:"Siti Nurhaliza", role:"Wakil Kelas", s1:"siti-nur-1", s2:"siti-nur-2", quote:"Kode yang baik bukan yang rumit, tapi yang mudah dipahami oleh orang lain." },
+    { name:"Budi Santoso", role:"Sekretaris", s1:"budi-san-1", s2:"budi-san-2", quote:"Detail kecil yang sering terlewat justru menentukan kualitas sebuah aplikasi." },
+    { name:"Dewi Lestari", role:"Bendahara", s1:"dewi-les-1", s2:"dewi-les-2", quote:"Disiplin dalam menulis kode sama pentingnya dengan disiplin dalam mengelola sesuatu." },
+    { name:"Rizky Pratama", role:"Frontend Dev", s1:"rizky-pra-1", s2:"rizky-pra-2", quote:"UI yang indah tanpa UX yang baik adalah seperti kado tanpa isinya." },
+    { name:"Anisa Rahma", role:"Backend Dev", s1:"anisa-rah-1", s2:"anisa-rah-2", quote:"Backend mungkin tak terlihat, tapi tanpanya semuanya tidak akan berjalan." },
+    { name:"Dimas Arya", role:"UI/UX Design", s1:"dimas-ary-1", s2:"dimas-ary-2", quote:"Desain bukan hanya soal tampilan, tapi bagaimana pengguna merasakan pengalaman." },
+    { name:"Fitri Handayani", role:"Database Admin", s1:"fitri-han-1", s2:"fitri-han-2", quote:"Data adalah aset paling berharga. Jaga dengan baik, kelola dengan bijak." },
+    { name:"Galih Permana", role:"Mobile Dev", s1:"galih-per-1", s2:"galih-per-2", quote:"Aplikasi mobile yang baik harus bisa bekerja bahkan dalam kondisi sinyal buruk." },
+    { name:"Hana Safitri", role:"QA Tester", s1:"hana-saf-1", s2:"hana-saf-2", quote:"Menemukan bug itu bukan kegagalan, tapi penyelamat dari masalah yang lebih besar." },
+    { name:"Irfan Maulana", role:"DevOps", s1:"irfan-mau-1", s2:"irfan-mau-2", quote:"Otomasi bukan tentang mengganti manusia, tapi membebaskan manusia dari pekerjaan repetitif." },
+    { name:"Julia Puspita", role:"Frontend Dev", s1:"julia-pus-1", s2:"julia-pus-2", quote:"Setiap pixel yang kita tempatkan punya tujuan. Tidak ada yang kebetulan." },
+    { name:"Kevin Anggara", role:"Backend Dev", s1:"kevin-ang-1", s2:"kevin-ang-2", quote:"API yang baik adalah API yang tidak perlu dijelaskan berulang-ulang." },
+    { name:"Laila Amalia", role:"UI/UX Design", s1:"laila-ama-1", s2:"laila-ama-2", quote:"Empati terhadap pengguna adalah fondasi dari setiap keputusan desain." },
+    { name:"M. Rizal", role:"Fullstack Dev", s1:"rizal-fs-1", s2:"rizal-fs-2", quote:"Menjadi fullstack bukan berarti tahu semuanya, tapi mampu belajar apa saja." },
+    { name:"Nadia Kusuma", role:"Mobile Dev", s1:"nadia-kus-1", s2:"nadia-kus-2", quote:"Performa aplikasi mobile adalah rasa hormat kita terhadap waktu pengguna." },
+    { name:"Oscar Putra", role:"Frontend Dev", s1:"oscar-put-1", s2:"oscar-put-2", quote:"Responsive design bukan trend, tapi keharusan di era multi-perangkat." },
+    { name:"Putri Wulandari", role:"Backend Dev", s1:"putri-wul-1", s2:"putri-wul-2", quote:"Keamanan bukan fitur tambahan, tapi bagian integral dari setiap sistem." },
+    { name:"Qori Akbar", role:"Database Admin", s1:"qori-akb-1", s2:"qori-akb-2", quote:"Query yang lambat bukan masalah database, tapi masalah cara kita berpikir." },
+    { name:"Rina Marlina", role:"QA Tester", s1:"rina-mar-1", s2:"rina-mar-2", quote:"Kualitas bukan sesuatu yang kita tambahkan di akhir, tapi kita bangun dari awal." },
+    { name:"Surya Darma", role:"DevOps", s1:"surya-dar-1", s2:"surya-dar-2", quote:"Deploy yang lancar adalah hasil dari proses yang terstruktur dan terautomasi." },
+    { name:"Tania Wijaya", role:"UI/UX Design", s1:"tania-wij-1", s2:"tania-wij-2", quote:"Kesederhanaan adalah bentuk tertinggi dari kecanggihan desain." },
+    { name:"Umar Faruq", role:"Fullstack Dev", s1:"umar-far-1", s2:"umar-far-2", quote:"Coding adalah seni menyelesaikan masalah dengan cara yang elegan." },
+    { name:"Vina Octavia", role:"Frontend Dev", s1:"vina-oct-1", s2:"vina-oct-2", quote:"Animasi yang halus membuat perbedaan antara aplikasi biasa dan luar biasa." },
+    { name:"Wahyu Hidayat", role:"Backend Dev", s1:"wahyu-hid-1", s2:"wahyu-hid-2", quote:"Scalability harus dipikirkan sejak hari pertama menulis arsitektur." },
+    { name:"Xena Maharani", role:"Mobile Dev", s1:"xena-mah-1", s2:"xena-mah-2", quote:"User menghakimi aplikasi dalam 3 detik pertama. Buat detik itu berharga." },
+    { name:"Yoga Pratama", role:"Database Admin", s1:"yoga-pra-1", s2:"yoga-pra-2", quote:"Normalisasi database itu penting, tapi jangan lupa kadang denormalisasi lebih efisien." },
+    { name:"Zahra Aulia", role:"Frontend Dev", s1:"zahra-aul-1", s2:"zahra-aul-2", quote:"Aksesibilitas bukan opsional. Web untuk semua, bukan untuk sebagian." },
+    { name:"Arif Rahman", role:"Backend Dev", s1:"arif-rah-1", s2:"arif-rah-2", quote:"Clean code adalah kode yang bisa dibaca seperti membaca cerita." },
+    { name:"Bella Safira", role:"UI/UX Design", s1:"bella-saf-1", s2:"bella-saf-2", quote:"Wireframe sederhana bisa menyelamatkan kita dari puluhan jam revisi." },
+    { name:"Candra Wijaya", role:"Fullstack Dev", s1:"candra-wij-1", s2:"candra-wij-2", quote:"Teknologi berubah cepat, tapi fundamental pemrograman tetap sama." },
+    { name:"Diana Putri", role:"QA Tester", s1:"diana-put-1", s2:"diana-put-2", quote:"Automated testing menghemat waktu, tapi manual testing tetap punya tempat." },
+    { name:"Eko Prasetyo", role:"DevOps", s1:"eko-pras-1", s2:"eko-pras-2", quote:"Monitoring bukan opsional. Kalau tidak memantau, kita buta terhadap masalah." },
+    { name:"Fani Ramadhani", role:"Frontend Dev", s1:"fani-ram-1", s2:"fani-ram-2", quote:"CSS Grid dan Flexbox mengubah cara kita memandang layout selamanya." },
+    { name:"Gilang Maulana", role:"Backend Dev", s1:"gilang-mau-1", s2:"gilang-mau-2", quote:"Microservice bukan jawaban untuk semua masalah. Pilih arsitektur yang tepat." },
+    { name:"Hendra Kusuma", role:"Mobile Dev", s1:"hendra-kus-1", s2:"hendra-kus-2", quote:"Native, hybrid, atau cross-platform? Pilih berdasarkan kebutuhan, bukan hype." },
+];
+
+// ===== RENDER STUDENTS =====
+const grid = document.getElementById('studentsGrid');
+students.forEach((s, i) => {
+    const card = document.createElement('div');
+    card.className = 'student-card sr-s';
+    card.style.transitionDelay = `${(i % 6) * 0.06}s`;
+    card.dataset.name = s.name.toLowerCase();
+    card.innerHTML = `
+        <div class="photo-wrap" onclick="openStudentPopup(${i})">
+            <img src="https://picsum.photos/seed/${s.s1}/400/533.jpg" alt="${s.name}" class="photo-front" loading="lazy">
+            <img src="https://picsum.photos/seed/${s.s2}/400/533.jpg" alt="${s.name}" class="photo-back" loading="lazy">
+        </div>
+        <div class="p-2.5 sm:p-3">
+            <h4 class="text-[11px] sm:text-xs font-extrabold tracking-tight leading-tight" style="color:var(--text-primary);">${s.name}</h4>
+            <p class="text-[9px] sm:text-[10px] font-semibold tracking-wider uppercase mt-0.5" style="color:var(--accent);opacity:0.7;">${s.role}</p>
+        </div>
+    `;
+    grid.appendChild(card);
+});
+
+// ===== SEARCH =====
+function filterStudents() {
+    const q = document.getElementById('searchInput').value.toLowerCase().trim();
+    const cards = grid.querySelectorAll('.student-card');
+    let visible = 0;
+    cards.forEach(card => {
+        const match = card.dataset.name.includes(q);
+        if (match) {
+            card.classList.remove('hidden-card');
+            card.style.position = '';
+            visible++;
+        } else {
+            card.classList.add('hidden-card');
+            setTimeout(() => { if(card.classList.contains('hidden-card')) card.style.position = 'absolute'; }, 400);
+        }
+    });
+    document.getElementById('noResults').classList.toggle('show', visible === 0);
+}
+
+// ===== STUDENT POPUP =====
+function openStudentPopup(idx) {
+    const s = students[idx];
+    document.getElementById('popup-photo1').src = `https://picsum.photos/seed/${s.s1}/400/533.jpg`;
+    document.getElementById('popup-photo2').src = `https://picsum.photos/seed/${s.s2}/400/533.jpg`;
+    document.getElementById('popup-name').textContent = s.name;
+    document.getElementById('popup-role').textContent = s.role;
+    document.getElementById('popup-quote').textContent = `"${s.quote}"`;
+    document.getElementById('studentPopup').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+function closeStudentPopup() {
+    document.getElementById('studentPopup').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// ===== LIGHTBOX =====
+function openLightbox(el) {
+    document.getElementById('lightbox-img').src = el.querySelector('img').src;
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeLightbox(); closeStudentPopup(); }
+});
+
+// ===== MOBILE MENU =====
+let menuOpen = false;
+function toggleMobileMenu() {
+    menuOpen = !menuOpen;
+    document.getElementById('mobileMenu').classList.toggle('active', menuOpen);
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    document.getElementById('menuIcon').setAttribute('data-icon', menuOpen ? 'mdi:close' : 'mdi:menu');
+}
+function closeMobileMenu() {
+    menuOpen = false;
+    document.getElementById('mobileMenu').classList.remove('active');
+    document.body.style.overflow = '';
+    document.getElementById('menuIcon').setAttribute('data-icon', 'mdi:menu');
+}
+
+// ===== THEME TOGGLE =====
+function toggleTheme() {
+    const html = document.documentElement;
+    const isDark = html.dataset.theme === 'dark';
+    html.dataset.theme = isDark ? 'light' : 'dark';
+    document.querySelector('.theme-icon-dark').style.display = isDark ? 'none' : '';
+    document.querySelector('.theme-icon-light').style.display = isDark ? '' : 'none';
+    localStorage.setItem('theme', html.dataset.theme);
+}
+// Init theme
+(function() {
+    const saved = localStorage.getItem('theme');
+    if (saved) {
+        document.documentElement.dataset.theme = saved;
+        document.querySelector('.theme-icon-dark').style.display = saved === 'dark' ? '' : 'none';
+        document.querySelector('.theme-icon-light').style.display = saved === 'dark' ? 'none' : '';
+    }
+})();
+
+// ===== SCROLL REVEAL =====
+const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            // Skill bars
+            entry.target.querySelectorAll('.skill-fill').forEach(bar => {
+                bar.style.width = bar.dataset.width;
+            });
+            // Counter
+            const counter = entry.target.querySelector('.stat-number');
+            if (counter && !counter.dataset.done) {
+                counter.dataset.done = '1';
+                animateCounter(counter, parseInt(counter.dataset.count));
+            }
+            obs.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.sr,.sr-l,.sr-r,.sr-s').forEach(el => obs.observe(el));
+
+function animateCounter(el, target) {
+    const start = performance.now();
+    const dur = 1400;
+    function update(now) {
+        const p = Math.min((now - start) / dur, 1);
+        const eased = 1 - Math.pow(1 - p, 4);
+        el.textContent = Math.floor(eased * target) + (target === 1 ? '' : '+');
+        if (p < 1) requestAnimationFrame(update);
+        else el.textContent = target + (target === 1 ? '' : '+');
+    }
+    requestAnimationFrame(update);
+}
+
+// ===== NAV BEHAVIORS =====
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+let lastScroll = 0;
+const nav = document.querySelector('nav');
+
+window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+
+    // Hide/show nav
+    if (y > lastScroll && y > 80) { nav.style.transform = 'translateY(-100%)'; }
+    else { nav.style.transform = 'translateY(0)'; }
+    nav.style.transition = 'transform 0.35s ease';
+    lastScroll = y;
+
+    // Back to top
+    const btn = document.getElementById('backToTop');
+    btn.style.opacity = y > 500 ? '1' : '0';
+    btn.style.pointerEvents = y > 500 ? 'all' : 'none';
+
+    // Active nav
+    sections.forEach(sec => {
+        const top = sec.offsetTop - 120;
+        if (y >= top && y < top + sec.offsetHeight) {
+            navLinks.forEach(l => {
+                l.classList.toggle('active', l.getAttribute('href') === `#${sec.id}`);
+            });
+        }
+    });
+});
+
+// ===== CONTACT FORM =====
+function handleSubmit(e) {
+    e.preventDefault();
+    const msg = document.getElementById('formMsg');
+    msg.className = 'text-center text-sm py-3 rounded-lg';
+    msg.style.cssText = 'background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-border);';
+    msg.textContent = '✓ Pesan berhasil dikirim! Kami akan segera merespon.';
+    msg.classList.remove('hidden');
+    e.target.reset();
+    setTimeout(() => msg.classList.add('hidden'), 4000);
+}
+</script>
+</body>
+</html>
