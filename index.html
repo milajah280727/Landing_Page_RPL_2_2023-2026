@@ -71,7 +71,8 @@
             box-sizing: border-box
         }
 
-        html, body {
+        html,
+        body {
             overflow-x: hidden;
             width: 100%;
         }
@@ -139,52 +140,151 @@
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px) }
-            to { opacity: 1; transform: translateY(0) }
+            from {
+                opacity: 0;
+                transform: translateY(40px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
         }
 
         @keyframes fadeIn {
-            from { opacity: 0 }
-            to { opacity: 1 }
+            from {
+                opacity: 0
+            }
+
+            to {
+                opacity: 1
+            }
         }
 
         @keyframes lineGrow {
-            from { width: 0 }
-            to { width: 80px }
+            from {
+                width: 0
+            }
+
+            to {
+                width: 80px
+            }
         }
 
         @keyframes marquee {
-            0% { transform: translateX(0) }
-            100% { transform: translateX(-50%) }
+            0% {
+                transform: translateX(0)
+            }
+
+            100% {
+                transform: translateX(-50%)
+            }
         }
 
         @keyframes blink {
-            0%, 50% { opacity: 1 }
-            51%, 100% { opacity: 0 }
+
+            0%,
+            50% {
+                opacity: 1
+            }
+
+            51%,
+            100% {
+                opacity: 0
+            }
         }
 
-        .anim-fadeInUp { animation: fadeInUp .8s ease-out forwards }
-        .anim-fadeIn { animation: fadeIn 1s ease-out forwards }
-        .anim-lineGrow { animation: lineGrow .8s ease-out forwards }
-        .anim-marquee { animation: marquee 25s linear infinite }
+        .anim-fadeInUp {
+            animation: fadeInUp .8s ease-out forwards
+        }
 
-        .d1 { animation-delay: .1s }
-        .d2 { animation-delay: .2s }
-        .d3 { animation-delay: .3s }
-        .d4 { animation-delay: .4s }
-        .d5 { animation-delay: .5s }
-        .d6 { animation-delay: .6s }
-        .d7 { animation-delay: .7s }
-        .d8 { animation-delay: .8s }
+        .anim-fadeIn {
+            animation: fadeIn 1s ease-out forwards
+        }
 
-        .sr { opacity: 0; transform: translateY(40px); transition: all .8s cubic-bezier(.16, 1, .3, 1) }
-        .sr.visible { opacity: 1; transform: translateY(0) }
-        .sr-l { opacity: 0; transform: translateX(-50px); transition: all .8s cubic-bezier(.16, 1, .3, 1) }
-        .sr-l.visible { opacity: 1; transform: translateX(0) }
-        .sr-r { opacity: 0; transform: translateX(50px); transition: all .8s cubic-bezier(.16, 1, .3, 1) }
-        .sr-r.visible { opacity: 1; transform: translateX(0) }
-        .sr-s { opacity: 0; transform: scale(.92); transition: all .6s cubic-bezier(.16, 1, .3, 1) }
-        .sr-s.visible { opacity: 1; transform: scale(1) }
+        .anim-lineGrow {
+            animation: lineGrow .8s ease-out forwards
+        }
+
+        .anim-marquee {
+            animation: marquee 25s linear infinite
+        }
+
+        .d1 {
+            animation-delay: .1s
+        }
+
+        .d2 {
+            animation-delay: .2s
+        }
+
+        .d3 {
+            animation-delay: .3s
+        }
+
+        .d4 {
+            animation-delay: .4s
+        }
+
+        .d5 {
+            animation-delay: .5s
+        }
+
+        .d6 {
+            animation-delay: .6s
+        }
+
+        .d7 {
+            animation-delay: .7s
+        }
+
+        .d8 {
+            animation-delay: .8s
+        }
+
+        .sr {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all .8s cubic-bezier(.16, 1, .3, 1)
+        }
+
+        .sr.visible {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        .sr-l {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all .8s cubic-bezier(.16, 1, .3, 1)
+        }
+
+        .sr-l.visible {
+            opacity: 1;
+            transform: translateX(0)
+        }
+
+        .sr-r {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all .8s cubic-bezier(.16, 1, .3, 1)
+        }
+
+        .sr-r.visible {
+            opacity: 1;
+            transform: translateX(0)
+        }
+
+        .sr-s {
+            opacity: 0;
+            transform: scale(.92);
+            transition: all .6s cubic-bezier(.16, 1, .3, 1)
+        }
+
+        .sr-s.visible {
+            opacity: 1;
+            transform: scale(1)
+        }
 
         .hero-title {
             font-size: clamp(2.8rem, 11vw, 10rem);
@@ -240,7 +340,9 @@
         }
 
         .nav-link:hover,
-        .nav-link.active { color: var(--text-primary) }
+        .nav-link.active {
+            color: var(--text-primary)
+        }
 
         .nav-link::after {
             content: '';
@@ -255,7 +357,9 @@
         }
 
         .nav-link:hover::after,
-        .nav-link.active::after { width: 100% }
+        .nav-link.active::after {
+            width: 100%
+        }
 
         .btn-accent {
             position: relative;
@@ -383,8 +487,13 @@
             outline: none
         }
 
-        .carousel-btn-prev { left: 0 }
-        .carousel-btn-next { right: 0 }
+        .carousel-btn-prev {
+            left: 0
+        }
+
+        .carousel-btn-next {
+            right: 0
+        }
 
         .carousel-btn-inner {
             display: inline-flex;
@@ -428,7 +537,9 @@
             transition: opacity .5s
         }
 
-        .gallery-item:hover .g-overlay { opacity: 1 }
+        .gallery-item:hover .g-overlay {
+            opacity: 1
+        }
 
         .gallery-item .g-caption {
             position: absolute;
@@ -495,10 +606,25 @@
             transition: opacity .5s ease, filter .5s ease
         }
 
-        .photo-front { opacity: 1; filter: var(--img-filter); z-index: 1 }
-        .photo-back { opacity: 0; filter: var(--img-filter-hover); z-index: 2 }
-        .photo-wrap:hover .photo-front { opacity: 0 }
-        .photo-wrap:hover .photo-back { opacity: 1 }
+        .photo-front {
+            opacity: 1;
+            filter: var(--img-filter);
+            z-index: 1
+        }
+
+        .photo-back {
+            opacity: 0;
+            filter: var(--img-filter-hover);
+            z-index: 2
+        }
+
+        .photo-wrap:hover .photo-front {
+            opacity: 0
+        }
+
+        .photo-wrap:hover .photo-back {
+            opacity: 1
+        }
 
         .guru-card {
             background: var(--bg-card);
@@ -577,8 +703,16 @@
             transition: all .3s
         }
 
-        .page-btn:hover { border-color: var(--accent-border); color: var(--accent) }
-        .page-btn.active { background: var(--accent); border-color: var(--accent); color: #fff }
+        .page-btn:hover {
+            border-color: var(--accent-border);
+            color: var(--accent)
+        }
+
+        .page-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff
+        }
 
         .student-popup {
             position: fixed;
@@ -593,7 +727,10 @@
             transition: opacity .4s ease
         }
 
-        .student-popup.active { opacity: 1; pointer-events: all }
+        .student-popup.active {
+            opacity: 1;
+            pointer-events: all
+        }
 
         .student-popup .popup-bg {
             position: absolute;
@@ -617,7 +754,9 @@
             overflow: hidden
         }
 
-        .student-popup.active .popup-card { transform: scale(1) translateY(0) }
+        .student-popup.active .popup-card {
+            transform: scale(1) translateY(0)
+        }
 
         .lightbox {
             position: fixed;
@@ -634,7 +773,10 @@
             transition: opacity .4s
         }
 
-        .lightbox.active { opacity: 1; pointer-events: all }
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: all
+        }
 
         .lightbox img {
             max-width: 90vw;
@@ -645,7 +787,9 @@
             transition: transform .4s cubic-bezier(.16, 1, .3, 1)
         }
 
-        .lightbox.active img { transform: scale(1) }
+        .lightbox.active img {
+            transform: scale(1)
+        }
 
         .mobile-menu {
             position: fixed;
@@ -661,7 +805,9 @@
             transition: transform .5s cubic-bezier(.16, 1, .3, 1), background .5s
         }
 
-        .mobile-menu.active { transform: translateX(0) }
+        .mobile-menu.active {
+            transform: translateX(0)
+        }
 
         .mobile-menu a {
             font-size: 1.3rem;
@@ -672,7 +818,9 @@
             transition: color .3s
         }
 
-        .mobile-menu a:hover { color: var(--accent) }
+        .mobile-menu a:hover {
+            color: var(--accent)
+        }
 
         .theme-toggle {
             width: 40px;
@@ -688,7 +836,10 @@
             transition: all .3s
         }
 
-        .theme-toggle:hover { border-color: var(--accent-border); color: var(--accent) }
+        .theme-toggle:hover {
+            border-color: var(--accent-border);
+            color: var(--accent)
+        }
 
         .search-box {
             background: var(--input-bg);
@@ -702,17 +853,45 @@
             transition: border-color .3s
         }
 
-        .search-box::placeholder { color: var(--text-tertiary) }
-        .search-box:focus { border-color: var(--accent-border) }
+        .search-box::placeholder {
+            color: var(--text-tertiary)
+        }
 
-        .divider { height: 1px; background: linear-gradient(to right, transparent, var(--border), transparent) }
-        .accent-line { height: 2px; width: 48px; background: var(--accent); border-radius: 1px }
+        .search-box:focus {
+            border-color: var(--accent-border)
+        }
 
-        .marquee-track { display: flex; width: max-content }
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--border), transparent)
+        }
 
-        .no-results { display: none; text-align: center; padding: 3rem 1rem; color: var(--text-tertiary) }
-        .no-results.show { display: block }
-        .section-alt { background: var(--section-alt) }
+        .accent-line {
+            height: 2px;
+            width: 48px;
+            background: var(--accent);
+            border-radius: 1px
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content
+        }
+
+        .no-results {
+            display: none;
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-tertiary)
+        }
+
+        .no-results.show {
+            display: block
+        }
+
+        .section-alt {
+            background: var(--section-alt)
+        }
     </style>
 </head>
 
@@ -723,7 +902,8 @@
 
     <!-- LIGHTBOX -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-        <button onclick="closeLightbox()" class="absolute top-5 right-5 z-10" style="color:var(--text-tertiary)"><span class="iconify" data-icon="mdi:close" data-width="28"></span></button>
+        <button onclick="closeLightbox()" class="absolute top-5 right-5 z-10" style="color:var(--text-tertiary)"><span
+                class="iconify" data-icon="mdi:close" data-width="28"></span></button>
         <img id="lightbox-img" src="" alt="Gallery">
     </div>
 
@@ -731,17 +911,27 @@
     <div class="student-popup" id="studentPopup">
         <div class="popup-bg" onclick="closeStudentPopup()"></div>
         <div class="popup-card">
-            <button onclick="closeStudentPopup()" class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full flex items-center justify-center" style="background:var(--bg-card);color:var(--text-tertiary);border:1px solid var(--border);cursor:pointer" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-tertiary)'"><span class="iconify" data-icon="mdi:close" data-width="16"></span></button>
+            <button onclick="closeStudentPopup()"
+                class="absolute top-4 right-4 z-10 w-8 h-8 rounded-full flex items-center justify-center"
+                style="background:var(--bg-card);color:var(--text-tertiary);border:1px solid var(--border);cursor:pointer"
+                onmouseover="this.style.color='var(--accent)'"
+                onmouseout="this.style.color='var(--text-tertiary)'"><span class="iconify" data-icon="mdi:close"
+                    data-width="16"></span></button>
             <div class="flex flex-col md:flex-row">
                 <div class="md:w-2/5 flex-shrink-0">
-                    <div class="photo-wrap aspect-[3/4] md:aspect-auto md:h-full"><img id="popup-photo1" src="" alt="" class="photo-front"><img id="popup-photo2" src="" alt="" class="photo-back"></div>
+                    <div class="photo-wrap aspect-[3/4] md:aspect-auto md:h-full"><img id="popup-photo1" src="" alt=""
+                            class="photo-front"><img id="popup-photo2" src="" alt="" class="photo-back"></div>
                 </div>
                 <div class="flex-1 p-6 md:p-8 flex flex-col justify-center">
-                    <span class="text-[10px] font-bold tracking-[.2em] uppercase" style="color:var(--accent)" id="popup-role">Role</span>
+                    <span class="text-[10px] font-bold tracking-[.2em] uppercase" style="color:var(--accent)"
+                        id="popup-role">Role</span>
                     <h3 class="text-2xl md:text-3xl font-black tracking-tight mt-2" id="popup-name">Name</h3>
                     <div class="accent-line mt-4 mb-5"></div>
                     <p class="text-sm leading-relaxed" style="color:var(--text-secondary)" id="popup-quote">Quote</p>
-                    <div class="mt-6 flex items-center gap-2" style="color:var(--text-muted)"><span class="iconify" data-icon="mdi:image-multiple-outline" data-width="14"></span><span class="text-[10px] font-semibold tracking-wider uppercase">Hover foto untuk melihat foto lain</span></div>
+                    <div class="mt-6 flex items-center gap-2" style="color:var(--text-muted)"><span class="iconify"
+                            data-icon="mdi:image-multiple-outline" data-width="14"></span><span
+                            class="text-[10px] font-semibold tracking-wider uppercase">Hover foto untuk melihat foto
+                            lain</span></div>
                 </div>
             </div>
         </div>
@@ -757,10 +947,13 @@
     </div>
 
     <!-- NAV -->
-    <nav class="fixed top-0 left-0 right-0 z-50" style="background:var(--nav-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border-light)">
+    <nav class="fixed top-0 left-0 right-0 z-50"
+        style="background:var(--nav-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border-light)">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
             <a href="#home" class="flex items-center gap-2.5">
-                <div class="w-7 h-7 sm:w-8 sm:h-8 rounded flex items-center justify-center" style="background:var(--accent)"><span class="text-white font-black text-xs sm:text-sm">R</span></div>
+                <div class="w-7 h-7 sm:w-8 sm:h-8 rounded flex items-center justify-center"
+                    style="background:var(--accent)"><span class="text-white font-black text-xs sm:text-sm">R</span>
+                </div>
                 <span class="font-extrabold text-xs tracking-[.15em] uppercase hidden sm:block">12 RPL</span>
             </a>
             <div class="hidden md:flex items-center gap-7">
@@ -773,10 +966,12 @@
             <div class="flex items-center gap-2 sm:gap-3">
                 <button class="theme-toggle" onclick="toggleTheme()" title="Ganti tema">
                     <span class="iconify theme-icon-dark" data-icon="mdi:weather-sunny" data-width="18"></span>
-                    <span class="iconify theme-icon-light" data-icon="mdi:weather-night" data-width="18" style="display:none"></span>
+                    <span class="iconify theme-icon-light" data-icon="mdi:weather-night" data-width="18"
+                        style="display:none"></span>
                 </button>
                 <a href="#guru" class="btn-accent hidden sm:inline-flex" style="padding:.5rem 1.25rem">Explore</a>
-                <button class="md:hidden" style="color:var(--text-primary)" onclick="toggleMobileMenu()"><span class="iconify" data-icon="mdi:menu" data-width="24" id="menuIcon"></span></button>
+                <button class="md:hidden" style="color:var(--text-primary)" onclick="toggleMobileMenu()"><span
+                        class="iconify" data-icon="mdi:menu" data-width="24" id="menuIcon"></span></button>
             </div>
         </div>
     </nav>
@@ -786,23 +981,28 @@
         <div class="hero-carousel" id="heroCarousel">
             <!-- Item 1 -->
             <div class="hero-slide active" data-carousel-item>
-                <img src="https://res.cloudinary.com/dsohdecct/image/upload/q_auto/f_auto/w_1600/h_900/c_fill/kelas12rpl/kegiatan/dzv52jpxs7blrpymab24.jpg" alt="Slide 1">
+                <img src="https://res.cloudinary.com/dsohdecct/image/upload/q_auto/f_auto/w_1600/h_900/c_fill/kelas12rpl/kegiatan/dzv52jpxs7blrpymab24.jpg"
+                    alt="Slide 1">
             </div>
             <!-- Item 2 -->
             <div class="hero-slide" data-carousel-item>
-                <img src="https://res.cloudinary.com/dsohdecct/image/upload/q_auto/f_auto/w_1600/h_900/c_fill/kelas12rpl/galeri/j0oogatfna5zx9hi0ow1.jpg" alt="Slide 2">
+                <img src="https://res.cloudinary.com/dsohdecct/image/upload/q_auto/f_auto/w_1600/h_900/c_fill/kelas12rpl/galeri/j0oogatfna5zx9hi0ow1.jpg"
+                    alt="Slide 2">
             </div>
             <!-- Item 3 -->
             <div class="hero-slide" data-carousel-item>
-                <img src="https://res.cloudinary.com/dsohdecct/image/upload/q_auto/f_auto/w_1600/h_900/c_fill/kelas12rpl/galeri/fvle33znvribmaumra4j.jpg" alt="Slide 3">
+                <img src="https://res.cloudinary.com/dsohdecct/image/upload/q_auto/f_auto/w_1600/h_900/c_fill/kelas12rpl/galeri/fvle33znvribmaumra4j.jpg"
+                    alt="Slide 3">
             </div>
             <!-- Item 4 -->
             <div class="hero-slide" data-carousel-item>
-                <img src="https://res.cloudinary.com/dsohdecct/image/upload/q_auto/f_auto/w_1600/h_900/c_fill/kelas12rpl/galeri/dwkv2rk9ng8khf3dhf4v.jpg" alt="Slide 4">
+                <img src="https://res.cloudinary.com/dsohdecct/image/upload/q_auto/f_auto/w_1600/h_900/c_fill/kelas12rpl/galeri/dwkv2rk9ng8khf3dhf4v.jpg"
+                    alt="Slide 4">
             </div>
             <!-- Item 5 -->
             <div class="hero-slide" data-carousel-item>
-                <img src="https://res.cloudinary.com/dsohdecct/image/upload/q_auto/f_auto/w_1600/h_900/c_fill/kelas12rpl/galeri/ulbfhh1hbzpwa3xk4fgz.jpg" alt="Slide 5">
+                <img src="https://res.cloudinary.com/dsohdecct/image/upload/q_auto/f_auto/w_1600/h_900/c_fill/kelas12rpl/galeri/ulbfhh1hbzpwa3xk4fgz.jpg"
+                    alt="Slide 5">
             </div>
 
             <div class="hero-carousel-overlay"></div>
@@ -810,28 +1010,46 @@
             <!-- Slider controls -->
             <button type="button" class="carousel-btn carousel-btn-prev" data-carousel-prev>
                 <span class="carousel-btn-inner">
-                    <svg class="w-5 h-5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m15 19-7-7 7-7"/></svg>
+                    <svg class="w-5 h-5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                        height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m15 19-7-7 7-7" />
+                    </svg>
                 </span>
             </button>
             <button type="button" class="carousel-btn carousel-btn-next" data-carousel-next>
                 <span class="carousel-btn-inner">
-                    <svg class="w-5 h-5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m9 5 7 7-7 7"/></svg>
+                    <svg class="w-5 h-5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                        height="24" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m9 5 7 7-7 7" />
+                    </svg>
                 </span>
             </button>
         </div>
 
-        <div class="absolute inset-0 opacity-[0.03]" style="background-image:linear-gradient(var(--text-primary) 1px,transparent 1px),linear-gradient(90deg,var(--text-primary) 1px,transparent 1px);background-size:60px 60px;z-index:2"></div>
-        <div class="absolute inset-0" style="background:radial-gradient(ellipse at 50% 40%,rgba(37,99,235,0.08) 0%,transparent 65%);z-index:2"></div>
+        <div class="absolute inset-0 opacity-[0.03]"
+            style="background-image:linear-gradient(var(--text-primary) 1px,transparent 1px),linear-gradient(90deg,var(--text-primary) 1px,transparent 1px);background-size:60px 60px;z-index:2">
+        </div>
+        <div class="absolute inset-0"
+            style="background:radial-gradient(ellipse at 50% 40%,rgba(37,99,235,0.08) 0%,transparent 65%);z-index:2">
+        </div>
 
         <div class="relative z-10 text-center px-4 sm:px-6 max-w-6xl mx-auto w-full">
-            <div class="anim-fadeIn opacity-0 d2 mb-4 sm:mb-6"><span class="hero-sub" style="color:var(--text-muted)">Rekayasa Perangkat Lunak — 2023 / 2026</span></div>
-            <h1 class="hero-title anim-fadeInUp opacity-0 d3">Kelas<br><span style="color:var(--accent);opacity:1">RPL</span> 2</h1>
+            <div class="anim-fadeIn opacity-0 d2 mb-4 sm:mb-6"><span class="hero-sub"
+                    style="color:var(--text-muted)">Rekayasa Perangkat Lunak — 2023 / 2026</span></div>
+            <h1 class="hero-title anim-fadeInUp opacity-0 d3">Kelas<br><span
+                    style="color:var(--accent);opacity:1">RPL</span> 2</h1>
             <div class="flex justify-center mt-6 sm:mt-8 mb-6 sm:mb-8 anim-fadeIn opacity-0 d5">
                 <div class="accent-line anim-lineGrow" style="width:80px"></div>
             </div>
-            <div class="text-sm sm:text-base max-w-lg mx-auto leading-relaxed anim-fadeInUp opacity-0 d6" style="color:var(--text-secondary);min-height:1.8em"><span id="typewriter"></span><span class="typewriter-cursor"></span></div>
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mt-8 sm:mt-10 anim-fadeInUp opacity-0 d7">
-                <a href="#kegiatan" class="btn-accent inline-flex items-center gap-2">Lihat Kegiatan <span class="iconify" data-icon="mdi:arrow-down" data-width="14"></span></a>
+            <div class="text-sm sm:text-base max-w-lg mx-auto leading-relaxed anim-fadeInUp opacity-0 d6"
+                style="color:var(--text-secondary);min-height:1.8em"><span id="typewriter"></span><span
+                    class="typewriter-cursor"></span></div>
+            <div
+                class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mt-8 sm:mt-10 anim-fadeInUp opacity-0 d7">
+                <a href="#kegiatan" class="btn-accent inline-flex items-center gap-2">Lihat Kegiatan <span
+                        class="iconify" data-icon="mdi:arrow-down" data-width="14"></span></a>
                 <a href="#students" class="btn-outline">Anggota Kelas</a>
             </div>
         </div>
@@ -846,7 +1064,8 @@
         </div>
 
         <!-- Scroll indicator -->
-        <div class="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 z-10 anim-fadeIn opacity-0 d8" style="bottom:50px">
+        <div class="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 z-10 anim-fadeIn opacity-0 d8"
+            style="bottom:50px">
             <span class="text-[9px] font-bold tracking-[.3em] uppercase" style="color:var(--text-muted)">Scroll</span>
             <div class="w-px h-7 relative overflow-hidden" style="background:var(--border)">
                 <div class="w-full h-2.5 absolute animate-bounce" style="background:var(--accent)"></div>
@@ -855,23 +1074,32 @@
     </section>
 
     <!-- MARQUEE -->
-    <div class="py-3 overflow-hidden" style="border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light)">
+    <div class="py-3 overflow-hidden"
+        style="border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light)">
         <div class="marquee-track anim-marquee">
-            <span class="font-black text-xs sm:text-sm tracking-[.3em] uppercase whitespace-nowrap mx-6 sm:mx-8" style="color:var(--text-muted)">Rekayasa Perangkat Lunak</span>
+            <span class="font-black text-xs sm:text-sm tracking-[.3em] uppercase whitespace-nowrap mx-6 sm:mx-8"
+                style="color:var(--text-muted)">Rekayasa Perangkat Lunak</span>
             <span style="color:var(--accent);opacity:.4" class="mx-3">✦</span>
-            <span class="font-black text-xs sm:text-sm tracking-[.3em] uppercase whitespace-nowrap mx-6 sm:mx-8" style="color:var(--text-muted)">Software Engineering</span>
+            <span class="font-black text-xs sm:text-sm tracking-[.3em] uppercase whitespace-nowrap mx-6 sm:mx-8"
+                style="color:var(--text-muted)">Software Engineering</span>
             <span style="color:var(--accent);opacity:.4" class="mx-3">✦</span>
-            <span class="font-black text-xs sm:text-sm tracking-[.3em] uppercase whitespace-nowrap mx-6 sm:mx-8" style="color:var(--text-muted)">Kelas 12 RPL 2</span>
+            <span class="font-black text-xs sm:text-sm tracking-[.3em] uppercase whitespace-nowrap mx-6 sm:mx-8"
+                style="color:var(--text-muted)">Kelas 12 RPL 2</span>
             <span style="color:var(--accent);opacity:.4" class="mx-3">✦</span>
-            <span class="font-black text-xs sm:text-sm tracking-[.3em] uppercase whitespace-nowrap mx-6 sm:mx-8" style="color:var(--text-muted)">Coding & Development</span>
+            <span class="font-black text-xs sm:text-sm tracking-[.3em] uppercase whitespace-nowrap mx-6 sm:mx-8"
+                style="color:var(--text-muted)">Coding & Development</span>
             <span style="color:var(--accent);opacity:.4" class="mx-3">✦</span>
-            <span class="font-black text-xs sm:text-sm tracking-[.3em] uppercase whitespace-nowrap mx-6 sm:mx-8" style="color:var(--text-muted)">Rekayasa Perangkat Lunak</span>
+            <span class="font-black text-xs sm:text-sm tracking-[.3em] uppercase whitespace-nowrap mx-6 sm:mx-8"
+                style="color:var(--text-muted)">Rekayasa Perangkat Lunak</span>
             <span style="color:var(--accent);opacity:.4" class="mx-3">✦</span>
-            <span class="font-black text-xs sm:text-sm tracking-[.3em] uppercase whitespace-nowrap mx-6 sm:mx-8" style="color:var(--text-muted)">Software Engineering</span>
+            <span class="font-black text-xs sm:text-sm tracking-[.3em] uppercase whitespace-nowrap mx-6 sm:mx-8"
+                style="color:var(--text-muted)">Software Engineering</span>
             <span style="color:var(--accent);opacity:.4" class="mx-3">✦</span>
-            <span class="font-black text-xs sm:text-sm tracking-[.3em] uppercase whitespace-nowrap mx-6 sm:mx-8" style="color:var(--text-muted)">Kelas 12 RPL 2</span>
+            <span class="font-black text-xs sm:text-sm tracking-[.3em] uppercase whitespace-nowrap mx-6 sm:mx-8"
+                style="color:var(--text-muted)">Kelas 12 RPL 2</span>
             <span style="color:var(--accent);opacity:.4" class="mx-3">✦</span>
-            <span class="font-black text-xs sm:text-sm tracking-[.3em] uppercase whitespace-nowrap mx-6 sm:mx-8" style="color:var(--text-muted)">Coding & Development</span>
+            <span class="font-black text-xs sm:text-sm tracking-[.3em] uppercase whitespace-nowrap mx-6 sm:mx-8"
+                style="color:var(--text-muted)">Coding & Development</span>
             <span style="color:var(--accent);opacity:.4" class="mx-3">✦</span>
         </div>
     </div>
@@ -881,7 +1109,9 @@
         <div class="max-w-5xl mx-auto px-4 sm:px-6">
             <div class="text-center mb-12 sm:mb-16 sr">
                 <span class="section-label">Pembimbing Multifungsi</span>
-                <div class="flex justify-center mt-3 mb-5"><div class="accent-line"></div></div>
+                <div class="flex justify-center mt-3 mb-5">
+                    <div class="accent-line"></div>
+                </div>
                 <h2 class="section-title">GURU TERBAIK</h2>
                 <p class="text-xs sm:text-sm mt-4 max-w-md mx-auto" style="color:var(--text-muted)"></p>
             </div>
@@ -894,18 +1124,32 @@
                         </div>
                     </div>
                     <div class="flex-1 p-6 md:p-8 flex flex-col justify-center relative">
-                        <div class="absolute top-0 left-0 right-0 h-1 rounded-t-xl" style="background:linear-gradient(90deg,var(--accent),#8B5CF6)"></div>
+                        <div class="absolute top-0 left-0 right-0 h-1 rounded-t-xl"
+                            style="background:linear-gradient(90deg,var(--accent),#8B5CF6)"></div>
                         <div class="flex items-center gap-2 mb-3">
-                            <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:var(--accent-bg)"><span class="iconify" data-icon="mdi:medal-outline" data-width="18" style="color:var(--accent)"></span></div>
-                            <span class="text-[10px] font-bold tracking-[.2em] uppercase" style="color:var(--accent)">Guru Produktif dari segala guru produktif</span>
+                            <div class="w-8 h-8 rounded-lg flex items-center justify-center"
+                                style="background:var(--accent-bg)"><span class="iconify" data-icon="mdi:medal-outline"
+                                    data-width="18" style="color:var(--accent)"></span></div>
+                            <span class="text-[10px] font-bold tracking-[.2em] uppercase"
+                                style="color:var(--accent)">Guru Produktif dari segala guru produktif</span>
                         </div>
                         <h3 class="text-2xl md:text-3xl font-black tracking-tight">Dzikri Pangestu</h3>
-                        <p class="text-sm mt-2" style="color:var(--text-muted)">Guru Produktif — Rekayasa Perangkat Lunak</p>
+                        <p class="text-sm mt-2" style="color:var(--text-muted)">Guru Produktif — Rekayasa Perangkat
+                            Lunak</p>
                         <div class="divider my-4"></div>
                         <div class="space-y-2.5">
-                            <div class="flex items-center gap-2.5"><span class="iconify" data-icon="mdi:book-open-variant" data-width="16" style="color:var(--accent)"></span><span class="text-xs" style="color:var(--text-secondary)">Pemrograman Web, Basis Data, Software Engineering</span></div>
-                            <div class="flex items-center gap-2.5"><span class="iconify" data-icon="mdi:clock-outline" data-width="16" style="color:var(--accent)"></span><span class="text-xs" style="color:var(--text-secondary)">5 Tahun Pengalaman Mengajar</span></div>
-                            <div class="flex items-center gap-2.5"><span class="iconify" data-icon="mdi:trophy-outline" data-width="16" style="color:var(--accent)"></span><span class="text-xs" style="color:var(--text-secondary)">Pengendali Segala Software Engineering</span></div>
+                            <div class="flex items-center gap-2.5"><span class="iconify"
+                                    data-icon="mdi:book-open-variant" data-width="16"
+                                    style="color:var(--accent)"></span><span class="text-xs"
+                                    style="color:var(--text-secondary)">Pemrograman Web, Basis Data, Software
+                                    Engineering</span></div>
+                            <div class="flex items-center gap-2.5"><span class="iconify" data-icon="mdi:clock-outline"
+                                    data-width="16" style="color:var(--accent)"></span><span class="text-xs"
+                                    style="color:var(--text-secondary)">5 Tahun Pengalaman Mengajar</span></div>
+                            <div class="flex items-center gap-2.5"><span class="iconify" data-icon="mdi:trophy-outline"
+                                    data-width="16" style="color:var(--accent)"></span><span class="text-xs"
+                                    style="color:var(--text-secondary)">Pengendali Segala Software Engineering</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -920,40 +1164,75 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="text-center mb-12 sm:mb-16 sr">
                 <span class="section-label">Dokumentasi</span>
-                <div class="flex justify-center mt-3 mb-5"><div class="accent-line"></div></div>
+                <div class="flex justify-center mt-3 mb-5">
+                    <div class="accent-line"></div>
+                </div>
                 <h2 class="section-title">GALERI KEGIATAN</h2>
-                <p class="text-xs sm:text-sm mt-4 max-w-md mx-auto" style="color:var(--text-muted)">Momen-momen berharga dari berbagai kegiatan kelas 12 RPL 2.</p>
+                <p class="text-xs sm:text-sm mt-4 max-w-md mx-auto" style="color:var(--text-muted)">Momen-momen berharga
+                    dari berbagai kegiatan kelas 12 RPL 2.</p>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 sm:gap-3">
                 <div class="gallery-item sm:col-span-2 sm:row-span-2 sr-s" onclick="openLightbox(this)">
-                    <div class="aspect-[4/3] sm:aspect-auto sm:h-full"><img src="https://res.cloudinary.com/dsohdecct/image/upload/q_auto/f_auto/w_800/h_800/c_fill/kelas12rpl/kegiatan/dzv52jpxs7blrpymab24.jpg" alt="Coding" class="w-full h-full object-cover"></div>
+                    <div class="aspect-[4/3] sm:aspect-auto sm:h-full"><img
+                            src="https://res.cloudinary.com/dsohdecct/image/upload/q_auto/f_auto/w_800/h_800/c_fill/kelas12rpl/kegiatan/dzv52jpxs7blrpymab24.jpg"
+                            alt="Coding" class="w-full h-full object-cover"></div>
                     <div class="g-overlay"></div>
-                    <div class="g-caption"><span class="text-[9px] font-bold tracking-[.2em] uppercase text-white/50">Lomba Antar Jurusan</span><h3 class="text-base sm:text-lg font-extrabold tracking-tight mt-1 text-white">Pekan Kreatifitas Siswa</h3></div>
+                    <div class="g-caption"><span
+                            class="text-[9px] font-bold tracking-[.2em] uppercase text-white/50">Lomba Antar
+                            Jurusan</span>
+                        <h3 class="text-base sm:text-lg font-extrabold tracking-tight mt-1 text-white">Pekan Kreatifitas
+                            Siswa</h3>
+                    </div>
                 </div>
                 <div class="gallery-item sr-s" onclick="openLightbox(this)" style="transition-delay:.08s">
-                    <div class="aspect-[4/3]"><img src="https://picsum.photos/seed/kegiatan2/800/600" alt="Meeting" class="w-full h-full object-cover"></div>
+                    <div class="aspect-[4/3]"><img src="https://picsum.photos/seed/kegiatan2/800/600" alt="Meeting"
+                            class="w-full h-full object-cover"></div>
                     <div class="g-overlay"></div>
-                    <div class="g-caption"><span class="text-[9px] font-bold tracking-[.2em] uppercase text-white/50">Meeting</span><h3 class="text-sm sm:text-base font-extrabold tracking-tight mt-1 text-white">Diskusi Project</h3></div>
+                    <div class="g-caption"><span
+                            class="text-[9px] font-bold tracking-[.2em] uppercase text-white/50">Meeting</span>
+                        <h3 class="text-sm sm:text-base font-extrabold tracking-tight mt-1 text-white">Diskusi Project
+                        </h3>
+                    </div>
                 </div>
                 <div class="gallery-item sr-s" onclick="openLightbox(this)" style="transition-delay:.16s">
-                    <div class="aspect-[4/3]"><img src="https://picsum.photos/seed/kegiatan3/800/600" alt="Presentasi" class="w-full h-full object-cover"></div>
+                    <div class="aspect-[4/3]"><img src="https://picsum.photos/seed/kegiatan3/800/600" alt="Presentasi"
+                            class="w-full h-full object-cover"></div>
                     <div class="g-overlay"></div>
-                    <div class="g-caption"><span class="text-[9px] font-bold tracking-[.2em] uppercase text-white/50">Presentasi</span><h3 class="text-sm sm:text-base font-extrabold tracking-tight mt-1 text-white">Demo Aplikasi</h3></div>
+                    <div class="g-caption"><span
+                            class="text-[9px] font-bold tracking-[.2em] uppercase text-white/50">Presentasi</span>
+                        <h3 class="text-sm sm:text-base font-extrabold tracking-tight mt-1 text-white">Demo Aplikasi
+                        </h3>
+                    </div>
                 </div>
                 <div class="gallery-item sr-s" onclick="openLightbox(this)">
-                    <div class="aspect-[4/3]"><img src="https://picsum.photos/seed/kegiatan4/800/600" alt="Outdoor" class="w-full h-full object-cover"></div>
+                    <div class="aspect-[4/3]"><img src="https://picsum.photos/seed/kegiatan4/800/600" alt="Outdoor"
+                            class="w-full h-full object-cover"></div>
                     <div class="g-overlay"></div>
-                    <div class="g-caption"><span class="text-[9px] font-bold tracking-[.2em] uppercase text-white/50">Outdoor</span><h3 class="text-sm sm:text-base font-extrabold tracking-tight mt-1 text-white">Study Tour Industri</h3></div>
+                    <div class="g-caption"><span
+                            class="text-[9px] font-bold tracking-[.2em] uppercase text-white/50">Outdoor</span>
+                        <h3 class="text-sm sm:text-base font-extrabold tracking-tight mt-1 text-white">Study Tour
+                            Industri</h3>
+                    </div>
                 </div>
                 <div class="gallery-item sr-s" onclick="openLightbox(this)" style="transition-delay:.08s">
-                    <div class="aspect-[4/3]"><img src="https://picsum.photos/seed/kegiatan5/800/600" alt="Kompetisi" class="w-full h-full object-cover"></div>
+                    <div class="aspect-[4/3]"><img src="https://picsum.photos/seed/kegiatan5/800/600" alt="Kompetisi"
+                            class="w-full h-full object-cover"></div>
                     <div class="g-overlay"></div>
-                    <div class="g-caption"><span class="text-[9px] font-bold tracking-[.2em] uppercase text-white/50">Kompetisi</span><h3 class="text-sm sm:text-base font-extrabold tracking-tight mt-1 text-white">Lomba IT Nasional</h3></div>
+                    <div class="g-caption"><span
+                            class="text-[9px] font-bold tracking-[.2em] uppercase text-white/50">Kompetisi</span>
+                        <h3 class="text-sm sm:text-base font-extrabold tracking-tight mt-1 text-white">Lomba IT Nasional
+                        </h3>
+                    </div>
                 </div>
                 <div class="gallery-item sr-s" onclick="openLightbox(this)" style="transition-delay:.16s">
-                    <div class="aspect-[4/3]"><img src="https://picsum.photos/seed/kegiatan6/800/600" alt="Ceremony" class="w-full h-full object-cover"></div>
+                    <div class="aspect-[4/3]"><img src="https://picsum.photos/seed/kegiatan6/800/600" alt="Ceremony"
+                            class="w-full h-full object-cover"></div>
                     <div class="g-overlay"></div>
-                    <div class="g-caption"><span class="text-[9px] font-bold tracking-[.2em] uppercase text-white/50">Ceremony</span><h3 class="text-sm sm:text-base font-extrabold tracking-tight mt-1 text-white">Penerimaan Rapor</h3></div>
+                    <div class="g-caption"><span
+                            class="text-[9px] font-bold tracking-[.2em] uppercase text-white/50">Ceremony</span>
+                        <h3 class="text-sm sm:text-base font-extrabold tracking-tight mt-1 text-white">Penerimaan Rapor
+                        </h3>
+                    </div>
                 </div>
             </div>
         </div>
@@ -969,18 +1248,23 @@
                     <span class="section-label">Anggota</span>
                     <div class="accent-line mt-3 mb-5"></div>
                     <h2 class="section-title">SISWA RPL</h2>
-                    <p class="text-xs sm:text-sm mt-3" style="color:var(--text-muted)">36 Siswa yang sudah berjuang bersama.</p>
+                    <p class="text-xs sm:text-sm mt-3" style="color:var(--text-muted)">36 Siswa yang sudah berjuang
+                        bersama.</p>
                 </div>
                 <div class="sr-r">
                     <div class="relative w-full sm:w-72">
-                        <span class="iconify absolute left-3 top-1/2 -translate-y-1/2" data-icon="mdi:magnify" data-width="18" style="color:var(--text-muted)"></span>
-                        <input type="text" id="searchInput" class="search-box" placeholder="Cari nama siswa..." oninput="filterStudents()">
+                        <span class="iconify absolute left-3 top-1/2 -translate-y-1/2" data-icon="mdi:magnify"
+                            data-width="18" style="color:var(--text-muted)"></span>
+                        <input type="text" id="searchInput" class="search-box" placeholder="Cari nama siswa..."
+                            oninput="filterStudents()">
                     </div>
                 </div>
             </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-3.5" id="studentsGrid"></div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-3.5"
+                id="studentsGrid"></div>
             <div class="no-results" id="noResults">
-                <span class="iconify mx-auto mb-3" data-icon="mdi:account-search-outline" data-width="48" style="color:var(--text-muted)"></span>
+                <span class="iconify mx-auto mb-3" data-icon="mdi:account-search-outline" data-width="48"
+                    style="color:var(--text-muted)"></span>
                 <p class="text-sm font-semibold" style="color:var(--text-tertiary)">Siswa tidak ditemukan</p>
                 <p class="text-xs mt-1" style="color:var(--text-muted)">Coba kata kunci lain</p>
             </div>
@@ -992,9 +1276,12 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6">
             <div class="text-center mb-12 sm:mb-14 sr">
                 <span class="section-label">Koleksi Foto</span>
-                <div class="flex justify-center mt-3 mb-5"><div class="accent-line"></div></div>
+                <div class="flex justify-center mt-3 mb-5">
+                    <div class="accent-line"></div>
+                </div>
                 <h2 class="section-title">GALERI KAMI</h2>
-                <p class="text-xs sm:text-sm mt-4 max-w-md mx-auto" style="color:var(--text-muted)">Kumpulan foto-foto dokumentasi selama perjalanan kelas 12 RPL 2.</p>
+                <p class="text-xs sm:text-sm mt-4 max-w-md mx-auto" style="color:var(--text-muted)">Kumpulan foto-foto
+                    dokumentasi selama perjalanan kelas 12 RPL 2.</p>
             </div>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 sm:gap-2.5" id="galeriGrid"></div>
             <div class="flex items-center justify-center gap-2 mt-8" id="galeriPagination"></div>
@@ -1006,30 +1293,52 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="flex flex-col sm:flex-row items-center justify-between gap-5">
                 <div class="flex items-center gap-2.5">
-                    <div class="w-6 h-6 rounded flex items-center justify-center" style="background:var(--accent)"><span class="text-white font-black text-[10px]">R</span></div>
-                    <span class="font-extrabold text-[10px] tracking-[.15em] uppercase" style="color:var(--text-muted)">Kelas 12 RPL 2</span>
+                    <div class="w-6 h-6 rounded flex items-center justify-center" style="background:var(--accent)"><span
+                            class="text-white font-black text-[10px]">R</span></div>
+                    <span class="font-extrabold text-[10px] tracking-[.15em] uppercase"
+                        style="color:var(--text-muted)">Kelas 12 RPL 2</span>
                 </div>
                 <div class="flex items-center gap-5">
-                    <a href="#home" class="text-[10px] font-bold tracking-wider uppercase" style="color:var(--text-muted)" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">Beranda</a>
-                    <a href="#guru" class="text-[10px] font-bold tracking-wider uppercase" style="color:var(--text-muted)" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">Guru</a>
-                    <a href="#kegiatan" class="text-[10px] font-bold tracking-wider uppercase" style="color:var(--text-muted)" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">Kegiatan</a>
-                    <a href="#students" class="text-[10px] font-bold tracking-wider uppercase" style="color:var(--text-muted)" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">Anggota</a>
-                    <a href="#galeri" class="text-[10px] font-bold tracking-wider uppercase" style="color:var(--text-muted)" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">Galeri</a>
+                    <a href="#home" class="text-[10px] font-bold tracking-wider uppercase"
+                        style="color:var(--text-muted)" onmouseover="this.style.color='var(--accent)'"
+                        onmouseout="this.style.color='var(--text-muted)'">Beranda</a>
+                    <a href="#guru" class="text-[10px] font-bold tracking-wider uppercase"
+                        style="color:var(--text-muted)" onmouseover="this.style.color='var(--accent)'"
+                        onmouseout="this.style.color='var(--text-muted)'">Guru</a>
+                    <a href="#kegiatan" class="text-[10px] font-bold tracking-wider uppercase"
+                        style="color:var(--text-muted)" onmouseover="this.style.color='var(--accent)'"
+                        onmouseout="this.style.color='var(--text-muted)'">Kegiatan</a>
+                    <a href="#students" class="text-[10px] font-bold tracking-wider uppercase"
+                        style="color:var(--text-muted)" onmouseover="this.style.color='var(--accent)'"
+                        onmouseout="this.style.color='var(--text-muted)'">Anggota</a>
+                    <a href="#galeri" class="text-[10px] font-bold tracking-wider uppercase"
+                        style="color:var(--text-muted)" onmouseover="this.style.color='var(--accent)'"
+                        onmouseout="this.style.color='var(--text-muted)'">Galeri</a>
                 </div>
                 <div class="flex items-center gap-3">
-                    <a href="#" style="color:var(--text-muted)" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'"><span class="iconify" data-icon="mdi:instagram" data-width="18"></span></a>
-                    <a href="#" style="color:var(--text-muted)" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'"><span class="iconify" data-icon="mdi:github" data-width="18"></span></a>
-                    <a href="#" style="color:var(--text-muted)" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'"><span class="iconify" data-icon="mdi:youtube" data-width="18"></span></a>
+                    <a href="#" style="color:var(--text-muted)" onmouseover="this.style.color='var(--accent)'"
+                        onmouseout="this.style.color='var(--text-muted)'"><span class="iconify"
+                            data-icon="mdi:instagram" data-width="18"></span></a>
+                    <a href="#" style="color:var(--text-muted)" onmouseover="this.style.color='var(--accent)'"
+                        onmouseout="this.style.color='var(--text-muted)'"><span class="iconify" data-icon="mdi:github"
+                            data-width="18"></span></a>
+                    <a href="#" style="color:var(--text-muted)" onmouseover="this.style.color='var(--accent)'"
+                        onmouseout="this.style.color='var(--text-muted)'"><span class="iconify" data-icon="mdi:youtube"
+                            data-width="18"></span></a>
                 </div>
             </div>
-            <div class="mt-6 sm:mt-8 pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between gap-3" style="border-top:1px solid var(--border-light)">
+            <div class="mt-6 sm:mt-8 pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between gap-3"
+                style="border-top:1px solid var(--border-light)">
                 <p class="text-[10px]" style="color:var(--text-muted)">© 2026 Kelas 12 RPL 2. All rights reserved.</p>
-                <p class="text-[10px]" style="color:var(--text-muted)">Dibuat <span style="color:var(--accent)"></span> oleh siswa RPL</p>
+                <p class="text-[10px]" style="color:var(--text-muted)">Dibuat <span style="color:var(--accent)"></span>
+                    oleh siswa RPL</p>
             </div>
         </div>
     </footer>
 
-    <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="fixed bottom-5 right-5 sm:bottom-8 sm:right-8 w-9 h-9 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center z-50 transition-all duration-300 opacity-0 pointer-events-none" style="background:var(--bg-card);border:1px solid var(--border);color:var(--text-muted);backdrop-filter:blur(8px)">
+    <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"
+        class="fixed bottom-5 right-5 sm:bottom-8 sm:right-8 w-9 h-9 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center z-50 transition-all duration-300 opacity-0 pointer-events-none"
+        style="background:var(--bg-card);border:1px solid var(--border);color:var(--text-muted);backdrop-filter:blur(8px)">
         <span class="iconify" data-icon="mdi:arrow-up" data-width="16"></span>
     </button>
 
@@ -1077,6 +1386,8 @@
         ];
 
         const galeriItems = [
+            { thumb: "https://res.cloudinary.com/dsohdecct/image/upload/q_auto/f_auto/w_400/h_400/c_fill/kelas12rpl/kegiatan/pbzfeinsz4x9ui8nrfs5.jpg", full: "https://res.cloudinary.com/dsohdecct/image/upload/q_auto/f_auto/w_800/h_800/c_fill/kelas12rpl/kegiatan/pbzfeinsz4x9ui8nrfs5.jpg", title: "Seminar English" },
+            { thumb: "https://res.cloudinary.com/dsohdecct/image/upload/q_auto/f_auto/w_400/h_400/c_fill/kelas12rpl/kegiatan/ldcqz6tcoezya19tvxtj.jpg", full: "https://res.cloudinary.com/dsohdecct/image/upload/q_auto/f_auto/w_800/h_800/c_fill/kelas12rpl/kegiatan/ldcqz6tcoezya19tvxtj.jpg", title: "With Mr Many" },
             { thumb: "https://res.cloudinary.com/dsohdecct/image/upload/q_auto/f_auto/w_400/h_400/c_fill/kelas12rpl/galeri/gutd5te9alciiqcnqkpu.jpg", full: "https://res.cloudinary.com/dsohdecct/image/upload/q_auto/f_auto/w_800/h_800/c_fill/kelas12rpl/galeri/gutd5te9alciiqcnqkpu.jpg", title: "Bukber cenah" },
             { thumb: "https://res.cloudinary.com/dsohdecct/image/upload/q_auto/f_auto/w_400/h_400/c_fill/kelas12rpl/galeri/ihpiff5gtka7tpcs059i.jpg", full: "https://res.cloudinary.com/dsohdecct/image/upload/q_auto/f_auto/w_800/h_800/c_fill/kelas12rpl/galeri/ihpiff5gtka7tpcs059i.jpg", title: "Ieu oge bukber" },
             { thumb: "https://res.cloudinary.com/dsohdecct/image/upload/q_auto/f_auto/w_400/h_400/c_fill/kelas12rpl/galeri/qs9amnkkpl1vteeywnl0.jpg", full: "https://res.cloudinary.com/dsohdecct/image/upload/q_auto/f_auto/w_800/h_800/c_fill/kelas12rpl/galeri/qs9amnkkpl1vteeywnl0.jpg", title: "lamun ieu foto" },
